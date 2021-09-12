@@ -1,8 +1,9 @@
 import React from "react";
+import Footer from "../../HOC/Layout/Footer/Footer";
 
 const Home =() => {
 return(
-
+<>
     <div
     className='p-5 text-center bg-image'
     style={{ backgroundImage: "url('https://www.emprendedores.es/wp-content/uploads/2018/09/mascotas-1024x576.jpg')", height: 500 }}
@@ -19,6 +20,9 @@ return(
       </div>
     </div>
   </div>
+
+  <Footer></Footer>
+  </>
 )
 
 }

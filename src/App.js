@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import NavbarHOC from "./HOC/Layout/NavbarHOC";
+import NavbarHOC from "./HOC/Layout/NavBar/NavbarHOC";
 import Login from "./Pages/Sign-in/Login";
 import Register from "./Pages/Sign-in/Register";
 import Home from "./Pages/Home/Home";

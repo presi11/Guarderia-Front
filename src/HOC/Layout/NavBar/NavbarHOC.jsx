@@ -15,6 +15,7 @@ const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
   const history = useHistory();
   const redirect = (route) => history.push(`/${route}`);
+  
   const logOut = () => {
     localStorage.clear();
     history.push("/Register");

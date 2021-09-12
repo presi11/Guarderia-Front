@@ -71,7 +71,7 @@ const NavbarHOC = ({ children }) => {
                 </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBNavbarLink onClick={() => redirect("About")}>
-                    About
+                    Acerca de 
                   </MDBNavbarLink>
                 </MDBNavbarItem>
               </MDBNavbarNav>

@@ -11,7 +11,7 @@ return(
     <div className='mask' style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}>
       <div className='d-flex justify-content-center align-items-center h-100'>
         <div className='text-white'>
-          <h1 className='mb-3'>Inico</h1>
+          <h1 className='mb-3'>Inicio</h1>
           <h4 className='mb-3'>Pexshop</h4>
           <a className='btn btn-outline-light btn-lg' href='#!' role='button'>
             Mascotas

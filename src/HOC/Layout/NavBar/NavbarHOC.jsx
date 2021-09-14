@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+
 import {
   MDBNavbar,
   MDBContainer,
@@ -10,15 +11,17 @@ import {
   MDBNavbarToggler,
   MDBNavbarBrand,
 } from "mdb-react-ui-kit";
+import LoginGoogle from "../../../Component/CardPet/Google-Login/LoginGoogle";
 
 const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
   const history = useHistory();
   const redirect = (route) => history.push(`/${route}`);
-  
+
   const logOut = () => {
     localStorage.clear();
-    history.push("/Register");
+    history.push("/Home");
+    window.location.reload(false);
   };
 
   return (
@@ -49,9 +52,7 @@ const NavbarHOC = ({ children }) => {
                 </MDBNavbarItem>
                 <MDBNavbarItem>
                   {!localStorage.getItem("token") ? (
-                    <MDBNavbarLink onClick={() => redirect("Login")}>
-                      Login
-                    </MDBNavbarLink>
+                    <LoginGoogle> login</LoginGoogle>
                   ) : null}
                 </MDBNavbarItem>
 

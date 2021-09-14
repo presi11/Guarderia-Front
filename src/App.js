@@ -5,14 +5,10 @@ import Login from "./Pages/Sign-in/Login";
 import Register from "./Pages/Sign-in/Register";
 import Home from "./Pages/Home/Home";
 import "./App.css";
-import useToken from "./useToken";
+
 
 const App = () => {
-  const { token, setToken } = useToken();
 
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
   return (
     <NavbarHOC>
       <Switch>

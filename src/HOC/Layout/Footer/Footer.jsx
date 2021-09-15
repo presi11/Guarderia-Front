@@ -31,7 +31,7 @@ const Footer = () => {
             <ul className='list-unstyled'>
               <li>
               <a   href="#!" role="button">
-                <i  class="fab fa-twitter me-2 " >
+                <i  className="fab fa-twitter me-2 " >
                 <FontAwesomeIcon icon={faTwitterSquare} size="2x"/> 
                 </i>
               Twitter
@@ -39,7 +39,7 @@ const Footer = () => {
               </li>
               <li>
               <a   href="#!" role="button" color="#55acee">
-                <i  class="fab fa-twitter me-2" >
+                <i  className="fab fa-twitter me-2" >
                 <FontAwesomeIcon icon={faFacebookSquare} size="2x"/> 
                 </i>
               Facebook
@@ -47,7 +47,7 @@ const Footer = () => {
               </li>
               <li>
               <a   href="#!" role="button">
-                <i  class="fab fa-twitter me-2" >
+                <i  className="fab fa-twitter me-2" >
                 <FontAwesomeIcon icon={faYoutubeSquare} size="2x" color="#ed302f"/> 
                 </i>
               Youtube
@@ -55,7 +55,7 @@ const Footer = () => {
               </li>
               <li >
               <a   href="#!" role="button"  >
-                <i backgroundColor="#0082ca" class="fab fa-twitter me-2" >
+                <i backgroundcolor="#0082ca" className="fab fa-twitter me-2" >
                 <FontAwesomeIcon icon={faInstagramSquare} size="2x"/> 
                 </i>
               Instagram
@@ -66,7 +66,7 @@ const Footer = () => {
         </MDBRow>
       </MDBContainer>
 
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+      <div className='text-center p-3' style={{ backgroundcolor: 'rgba(0, 0, 0, 0.2)' }}>
         &copy; {new Date().getFullYear()} Copyright:{' '}
         <a className='text-white' href='https://mdbootstrap.com/'>
           MDBootstrap.com

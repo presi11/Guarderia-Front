@@ -66,7 +66,7 @@ const NavbarHOC = ({ children }) => {
                 <MDBNavbarItem>
                   {!localStorage.getItem("token") ? (
                     <MDBNavbarLink onClick={() => redirect("Register")}>
-                      Registro
+                      Registro Mascota
                     </MDBNavbarLink>
                   ) : null}
                 </MDBNavbarItem>

@@ -5,6 +5,7 @@ import Footer from "./HOC/Layout/Footer/Footer";
 import Login from "./Pages/Sign-in/Login";
 import Register from "./Pages/Sign-in/Register";
 import Home from "./Pages/Home/Home";
+import MePets from "./Pages/Pets/MePets";
 import "./App.css";
 
 
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/Login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Home" component={Home} />
+        <Route path="/MePets" component={MePets} />
         <Route path="*" render={() => <p>NO TENGO NADA</p>} />
         
       </Switch>

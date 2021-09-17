@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
-import { loginAxios } from "../../../services/loginService";
+import { loginAxios } from "../../services/loginService";
 
 const LoginGoogle = () => {
   const responseGoogle = (response) => {

@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import Axios from "axios";
 
+/* sub
+email
+name
+ */
+
 const Register = () => {
   const [usernamereg, setUsername] = useState();
   const [emailreg, setEmail] = useState();

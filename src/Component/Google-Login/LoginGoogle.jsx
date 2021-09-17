@@ -3,7 +3,7 @@ import GoogleLogin from "react-google-login";
 
 const LoginGoogle = () => {
   const responseGoogle = (response) => {
-    console.log(response);
+    console.log(response.tokenId);
   };
 
   return (

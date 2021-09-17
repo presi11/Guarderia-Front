@@ -7,5 +7,3 @@ export const loginAxios = async (data)=>{
     const response = await axios.post(`${APIURL}`, {data: data});
     return response;
 }
-
-export const prueba = 1

@@ -1,19 +1,18 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
-import {loginAxios } from "../../../services/loginService"
+import { loginAxios } from "../../../services/loginService";
 
 const LoginGoogle = () => {
- 
   const responseGoogle = (response) => {
-    const {name, email, googleId} = response.profileObj;
-    const {tokenId} = response
+    const { name, email, googleId } = response.profileObj;
+    const { tokenId } = response;
     const user = {
       name,
       email,
       googleId,
-      tokenId
-    }
-    loginAxios(user).then(() => resp => console.log(resp))
+      tokenId,
+    };
+    loginAxios(user).then(() => (resp) => console.log(resp));
   };
 
   return (

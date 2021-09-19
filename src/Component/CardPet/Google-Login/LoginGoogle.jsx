@@ -5,18 +5,13 @@ import { loginAxios } from "../../../services/loginService";
 const LoginGoogle = () => {
   const responseGoogle = (response) => {
     console.log(response);
-    const { name, email, googleId } = response.profileObj;
-    const { tokenId } = response;
-    const { expires_in, expires_at} = response.tokenObj;
+    const {email, googleId } = response.profileObj;
     const data = {
-      name,
       email,
       googleId,
-      tokenId,
-      expires_at,
-      expires_in
-    };
-    loginAxios(data).then(() => (resp) => console.log(resp));
+    };  
+
+    loginAxios(data).then(() => (resp) => window.localStorage.setItem("access_token", resp.access_token));
   };
 
   return (

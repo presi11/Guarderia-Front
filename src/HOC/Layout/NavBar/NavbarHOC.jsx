@@ -11,7 +11,7 @@ import {
   MDBNavbarToggler,
   MDBNavbarBrand,
 } from "mdb-react-ui-kit";
-import LoginGoogle from "../../../Component/CardPet/Google-Login/LoginGoogle";
+import LoginGoogle from "../../../Component/Google-Login/LoginGoogle";
 
 const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
@@ -66,13 +66,18 @@ const NavbarHOC = ({ children }) => {
                 <MDBNavbarItem>
                   {!localStorage.getItem("token") ? (
                     <MDBNavbarLink onClick={() => redirect("Register")}>
-                      Registro
+                      Registro Mascota
                     </MDBNavbarLink>
                   ) : null}
                 </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBNavbarLink onClick={() => redirect("About")}>
-                    Acerca de 
+                    Acerca de
+                  </MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <MDBNavbarLink onClick={() => redirect("MePets")}>
+                    Mis Mascotas
                   </MDBNavbarLink>
                 </MDBNavbarItem>
               </MDBNavbarNav>

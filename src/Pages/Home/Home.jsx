@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../../HOC/Layout/Footer/Footer";
 import CardPet from "../../Component/CardPet/CardPet";
 const Home = () => {
   return (
@@ -32,7 +31,6 @@ const Home = () => {
       <CardPet />
       <CardPet />
       <CardPet />
-      <Footer></Footer>
     </>
   );
 };

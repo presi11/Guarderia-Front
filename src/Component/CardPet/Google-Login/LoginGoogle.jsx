@@ -4,15 +4,19 @@ import { loginAxios } from "../../../services/loginService";
 
 const LoginGoogle = () => {
   const responseGoogle = (response) => {
+    console.log(response);
     const { name, email, googleId } = response.profileObj;
     const { tokenId } = response;
-    const user = {
+    const { expires_in, expires_at} = response.tokenObj;
+    const data = {
       name,
       email,
       googleId,
       tokenId,
+      expires_at,
+      expires_in
     };
-    loginAxios(user).then(() => (resp) => console.log(resp));
+    loginAxios(data).then(() => (resp) => console.log(resp));
   };
 
   return (

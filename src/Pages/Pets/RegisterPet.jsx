@@ -3,12 +3,12 @@ import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 
 const Register = () => {
   const [formState, setFormState] = useState({
-    name: "",
+    petName: "",
     breed: "",
     size: "",
     age: "",
-    vaccination_plan: "",
-    care_to_have: "",
+    vaccinationPlan: "",
+    careToHave: "",
   });
 
   function sendForm(){
@@ -24,12 +24,13 @@ const Register = () => {
           sendForm();
         }}
       >
+        <br/>
         <MDBInput
-          value={formState.name}
+          value={formState.petName}
           onChange={(e) =>
             setFormState({
               ...formState,
-              name: e.target.value,
+              petName: e.target.value,
             })
           }
           label="Nombre de la mascota"

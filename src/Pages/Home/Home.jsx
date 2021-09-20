@@ -1,5 +1,4 @@
 import React from "react";
-import CardPet from "../../Component/CardPet/CardPet";
 const Home = () => {
   return (
     <>
@@ -23,14 +22,10 @@ const Home = () => {
               >
                 Mascotas
               </a>
-              <CardPet />
             </div>
           </div>
         </div>
       </div>
-      <CardPet />
-      <CardPet />
-      <CardPet />
     </>
   );
 };

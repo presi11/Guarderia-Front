@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import GoogleLogin from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { loginAxios } from "../../services/loginService";
 
 const LoginGoogle = () => {
-  const [isLogged, setIsLogged] = useState(false)
+
   const history = useHistory();
   const responseGoogle = (response) => {
     const { email, googleId } = response.profileObj;
@@ -16,9 +16,9 @@ const LoginGoogle = () => {
     loginAxios(data).then((resp) => {
       if (resp.status === 200) {
         history.push("/MePets");
-        setIsLogged(true)
+        window.location.reload(false);
       }else{
-        setIsLogged(false)
+        
       }
     });
   };

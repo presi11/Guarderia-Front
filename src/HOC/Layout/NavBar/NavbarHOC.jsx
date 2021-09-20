@@ -15,12 +15,15 @@ import LoginGoogle from "../../../Component/Google-Login/LoginGoogle";
 
 const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
+
   const history = useHistory();
   const redirect = (route) => history.push(`/${route}`);
+
 
   const logOut = () => {
     localStorage.clear();
     history.push("/Home");
+    
     window.location.reload(false);
   };
 
@@ -51,20 +54,20 @@ const NavbarHOC = ({ children }) => {
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {!localStorage.getItem("token") ? (
+                  {!localStorage.getItem("access_token") ? (
                     <LoginGoogle> login</LoginGoogle>
                   ) : null}
                 </MDBNavbarItem>
 
                 <MDBNavbarItem>
-                  {localStorage.getItem("token") ? (
+                  {localStorage.getItem("access_token") ? (
                     <MDBNavbarLink onClick={() => logOut()}>
                       Cerrar sesión
                     </MDBNavbarLink>
                   ) : null}
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {!localStorage.getItem("token") ? (
+                  {!localStorage.getItem("access_token") ? (
                     <MDBNavbarLink onClick={() => redirect("Register")}>
                       Registro Mascota
                     </MDBNavbarLink>

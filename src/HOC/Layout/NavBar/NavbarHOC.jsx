@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { GoogleLogout } from 'react-google-login';
 import {
   MDBNavbar,
   MDBContainer,
@@ -13,15 +13,18 @@ import {
 } from "mdb-react-ui-kit";
 import LoginGoogle from "../../../Component/Google-Login/LoginGoogle";
 
+
+
 const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
+
   const history = useHistory();
   const redirect = (route) => history.push(`/${route}`);
 
   const logOut = () => {
     localStorage.clear();
     history.push("/Home");
-    window.location.reload(false);
+    window.location.reload(false)
   };
 
   return (
@@ -29,7 +32,7 @@ const NavbarHOC = ({ children }) => {
       <header>
         <MDBNavbar expand="lg" light bgColor="warning">
           <MDBContainer fluid>
-            <MDBNavbarBrand href="#">Navbar</MDBNavbarBrand>
+            <MDBNavbarBrand href="#">Pexshop</MDBNavbarBrand>
             <MDBNavbarToggler
               type="button"
               data-target="#navbarColor02"
@@ -51,20 +54,23 @@ const NavbarHOC = ({ children }) => {
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {!localStorage.getItem("token") ? (
+                  {!localStorage.getItem("access_token") ? (
                     <LoginGoogle> login</LoginGoogle>
                   ) : null}
                 </MDBNavbarItem>
 
                 <MDBNavbarItem>
-                  {localStorage.getItem("token") ? (
-                    <MDBNavbarLink onClick={() => logOut()}>
-                      Cerrar sesión
-                    </MDBNavbarLink>
+                {localStorage.getItem("access_token") ? (
+                    <GoogleLogout
+                    clientId="103162145817-vq4hiompm6h9k073nihc2a9foeft3e7b.apps.googleusercontent.com"
+                    buttonText="Logout"
+                    onLogoutSuccess={logOut}
+                  >
+                  </GoogleLogout>
                   ) : null}
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {!localStorage.getItem("token") ? (
+                  {localStorage.getItem("access_token") ? (
                     <MDBNavbarLink onClick={() => redirect("Register")}>
                       Registro Mascota
                     </MDBNavbarLink>

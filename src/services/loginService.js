@@ -1,19 +1,29 @@
 import axios from "axios";
-//Cambiar la ip de la api por la que coincida en localhost
-const APIURL = "http://localhost:3001/pruebas";
+
+const APIURL = "https://springback.azurewebsites.net/oauth/token"
+/* const APIURL = "http://localhost:3001/pruebas"; */
 
 export const loginAxios = async (data) => {
-  const { tokenId, name, email, googleId, expires_at, expires_in } = data;
-  const user = {
-      name, email, googleId, expires_at, expires_in
-  }
-  const config = {
+  const { email, googleId } = data;
+  const user = `username=${email}&password=${googleId}&grant_type=password`;
+  //Usuario para pruebas en local
+  //const user = `username=chorro&password=quevivanloshorro&grant_type=password`
+  /* const config = {
     headers: {
-      Authorization: `Bearer ${tokenId}`,
+      /* Authorization: `Bearer ${tokenId}`, 
       "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      auth: basicAuth
     },
-  };
+  }; */
 
-  const response = await axios.post(`${APIURL}`, user, config);
+  const response = await axios.post(`${APIURL}`, user, {
+    "Content-Type": "application/x-www-form-urlencoded",
+    auth: {
+        username: 'pexshop-front',
+        password: 'quevivanloshorro'
+    }
+  });
+  window.localStorage.setItem("access_token", response.data.access_token);
   return response;
 };

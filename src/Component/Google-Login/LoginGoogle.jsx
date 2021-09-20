@@ -11,7 +11,7 @@ const LoginGoogle = () => {
       googleId,
     };  
 
-    loginAxios(data).then(() => (resp) => window.localStorage.setItem("access_token", resp.access_token));
+    loginAxios(data);
   };
 
   return (

@@ -29,7 +29,7 @@ const NavbarHOC = ({ children }) => {
       <header>
         <MDBNavbar expand="lg" light bgColor="warning">
           <MDBContainer fluid>
-            <MDBNavbarBrand href="#">Navbar</MDBNavbarBrand>
+            <MDBNavbarBrand href="#">Pexshop</MDBNavbarBrand>
             <MDBNavbarToggler
               type="button"
               data-target="#navbarColor02"

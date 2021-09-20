@@ -5,9 +5,9 @@ const APIURL = "https://guarderiaback.azurewebsites.net/oauth/token"
 
 export const loginAxios = async (data) => {
   const { email, googleId } = data;
-  /* const user = `username=${email}&password=${googleId}&grant_type=password`; */
+  const user = `username=${email}&password=${googleId}&grant_type=password`;
   //Usuario para pruebas en local
-  const user = `username=chorro&password=quevivanloshorro&grant_type=password`
+  //const user = `username=chorro&password=quevivanloshorro&grant_type=password`
   /* const config = {
     headers: {
       /* Authorization: `Bearer ${tokenId}`, 
@@ -24,5 +24,6 @@ export const loginAxios = async (data) => {
         password: 'quevivanloshorro'
     }
   });
+  window.localStorage.setItem("access_token", response.data.access_token);
   return response;
 };

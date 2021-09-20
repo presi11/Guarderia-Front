@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { GoogleLogout } from 'react-google-login';
 import {
   MDBNavbar,
   MDBContainer,
@@ -54,13 +54,17 @@ const NavbarHOC = ({ children }) => {
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {!localStorage.getItem("access_token") ? (
+                  {localStorage.getItem("access_token") ? (
                     <LoginGoogle> login</LoginGoogle>
                   ) : null}
                 </MDBNavbarItem>
 
                 <MDBNavbarItem>
+<<<<<<< HEAD
                 {localStorage.getItem("access_token") ? (
+=======
+                  {!localStorage.getItem("access_token") ? (
+>>>>>>> 0af20772ec0045f3cece1017ef31fb601d76ca1e
                     <GoogleLogout
                     clientId="103162145817-vq4hiompm6h9k073nihc2a9foeft3e7b.apps.googleusercontent.com"
                     buttonText="Logout"

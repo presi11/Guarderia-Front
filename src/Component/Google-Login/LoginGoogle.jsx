@@ -18,7 +18,6 @@ const LoginGoogle = () => {
        
         window.localStorage.setItem("access_token", resp.data.access_token);
         history.push("/MePets");
-        window.location.reload(false);
       }else{
         
       }
@@ -35,7 +34,7 @@ const LoginGoogle = () => {
         onFailure={responseGoogle}
         cookiePolicy={"single_host_origin"}
         isSignedIn={true}
-        
+
       />
     </>
   );

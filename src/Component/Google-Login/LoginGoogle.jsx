@@ -15,8 +15,8 @@ const LoginGoogle = () => {
     };
     loginAxios(data).then((resp) => {
       if (resp.status === 200) {
+        
         history.push("/MePets");
-        window.location.reload(false);
       }else{
         
       }

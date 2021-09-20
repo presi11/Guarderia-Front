@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { registerPet } from "../../services/registerPet";
 
 const Register = () => {
   const [formState, setFormState] = useState({
     petName: "",
-    breed: "",
+    raceId: "",
+    ownerId:1,
     size: "",
     age: "",
     vaccinationPlan: "",
@@ -12,6 +14,7 @@ const Register = () => {
   });
 
   function sendForm(){
+    registerPet(formState);
     console.log(formState);
   }
   
@@ -40,11 +43,11 @@ const Register = () => {
 
         <br />
         <MDBInput
-          value={formState.breed}
+          value={formState.raceId}
           onChange={(e) =>
             setFormState({
               ...formState,
-              breed: e.target.value,
+              raceId: e.target.value,
             })
           }
           label="Raza"
@@ -80,11 +83,11 @@ const Register = () => {
         />
         <br />
         <MDBInput
-          value={formState.vaccination_plan}
+          value={formState.vaccinationPlan}
           onChange={(e) =>
             setFormState({
               ...formState,
-              vaccination_plan: e.target.value,
+              vaccinationPlan: e.target.value,
             })
           }
           label="Plan de vacunación"
@@ -93,11 +96,11 @@ const Register = () => {
         />
         <br />
         <MDBInput
-          value={formState.care_to_have}
+          value={formState.careToHave}
           onChange={(e) =>
             setFormState({
               ...formState,
-              care_to_have: e.target.value,
+              careToHave: e.target.value,
             })
           }
           label="Cuidados a tener"

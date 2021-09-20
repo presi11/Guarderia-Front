@@ -16,7 +16,8 @@ const Footer = () => {
             <h5 className='text-uppercase'>Footer Content</h5>
 
             <p>
-             En Pexshop siempre estamos para brindarle a tu mascota la atencion y la mejor calidad de  dentro de 
+             En Pexshop siempre estamos para brindarle a tu mascota la mejor atencion y el cuidado dentro de nuestras amplias instalaciones, 
+             no dejes el cuidado de tus mascotas a cualquiera, dejalo todo en manos de Pexshop lideres en la atencion y cuidaro para tu perro.
             </p>
           </MDBCol>
 

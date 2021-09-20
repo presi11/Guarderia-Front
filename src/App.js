@@ -21,8 +21,11 @@ const App = () => {
         <Route path="*" render={() => <p>NO TENGO NADA</p>} />
         
       </Switch>
-      <Footer>
-        </Footer>
+
+      <header className="App-header">
+       <Footer/>
+      </header>
+      
     </NavbarHOC>
     
   );

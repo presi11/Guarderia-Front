@@ -16,9 +16,8 @@ const Footer = () => {
             <h5 className='text-uppercase'>Footer Content</h5>
 
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias.
-              Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est
-              atque cumque eum delectus sint!
+             En Pexshop siempre estamos para brindarle a tu mascota la mejor atencion y el cuidado dentro de nuestras amplias instalaciones, 
+             no dejes el cuidado de tus mascotas a cualquiera, dejalo todo en manos de Pexshop lideres en la atencion y cuidaro para tu perro.
             </p>
           </MDBCol>
 
@@ -69,7 +68,7 @@ const Footer = () => {
       <div className='text-center p-3' style={{ backgroundcolor: 'rgba(0, 0, 0, 0.2)' }}>
         &copy; {new Date().getFullYear()} Copyright:{' '}
         <a className='text-white' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
+          Ingenieria de Software
         </a>
       </div>
     </MDBFooter>

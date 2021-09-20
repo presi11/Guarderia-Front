@@ -20,8 +20,11 @@ const App = () => {
         <Route path="/MePets" component={MePets} />
         <Route path="*" render={() => <p>NO TENGO NADA</p>} />
       </Switch>
-      <Footer>
-        </Footer>
+
+      <header className="App-header">
+       <Footer/>
+      </header>
+      
     </NavbarHOC>
     
   );

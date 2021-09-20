@@ -12,6 +12,8 @@ import {
   MDBNavbarBrand,
 } from "mdb-react-ui-kit";
 import LoginGoogle from "../../../Component/Google-Login/LoginGoogle";
+import { GoogleLogout } from 'react-google-login';
+
 
 const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
@@ -19,12 +21,10 @@ const NavbarHOC = ({ children }) => {
   const history = useHistory();
   const redirect = (route) => history.push(`/${route}`);
 
-
   const logOut = () => {
     localStorage.clear();
     history.push("/Home");
-    
-    window.location.reload(false);
+    window.location.reload(false)
   };
 
   return (
@@ -60,14 +60,17 @@ const NavbarHOC = ({ children }) => {
                 </MDBNavbarItem>
 
                 <MDBNavbarItem>
-                  {localStorage.getItem("access_token") ? (
-                    <MDBNavbarLink onClick={() => logOut()}>
-                      Cerrar sesión
-                    </MDBNavbarLink>
+                {localStorage.getItem("access_token") ? (
+                    <GoogleLogout
+                    clientId="103162145817-vq4hiompm6h9k073nihc2a9foeft3e7b.apps.googleusercontent.com"
+                    buttonText="Logout"
+                    onLogoutSuccess={logOut}
+                  >
+                  </GoogleLogout>
                   ) : null}
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {!localStorage.getItem("access_token") ? (
+                  {localStorage.getItem("access_token") ? (
                     <MDBNavbarLink onClick={() => redirect("Register")}>
                       Registro Mascota
                     </MDBNavbarLink>

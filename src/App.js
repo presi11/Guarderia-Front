@@ -19,7 +19,6 @@ const App = () => {
         <Route path="/Home" component={Home} />
         <Route path="/MePets" component={MePets} />
         <Route path="*" render={() => <p>NO TENGO NADA</p>} />
-        
       </Switch>
       <Footer>
         </Footer>

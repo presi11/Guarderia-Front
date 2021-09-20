@@ -18,6 +18,7 @@ const LoginGoogle = () => {
        
         window.localStorage.setItem("access_token", resp.data.access_token);
         history.push("/MePets");
+        window.location.reload(false)
       }else{
         
       }

@@ -12,7 +12,7 @@ import {
   MDBNavbarBrand,
 } from "mdb-react-ui-kit";
 import LoginGoogle from "../../../Component/Google-Login/LoginGoogle";
-import { GoogleLogout } from 'react-google-login';
+
 
 
 const NavbarHOC = ({ children }) => {
@@ -54,7 +54,7 @@ const NavbarHOC = ({ children }) => {
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  {localStorage.getItem("access_token") ? (
+                  {!localStorage.getItem("access_token") ? (
                     <LoginGoogle> login</LoginGoogle>
                   ) : null}
                 </MDBNavbarItem>

@@ -8,7 +8,7 @@ const LoginGoogle = () => {
   const history = useHistory();
   const responseGoogle = (response) => {
     const { email, googleId } = response.profileObj;
-
+    console.log(response);
     const data = {
       email,
       googleId,

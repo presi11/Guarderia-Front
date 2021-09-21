@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { registerPet } from "../../services/registerPet";
 
 const Register = () => {
   const [formState, setFormState] = useState({
-    name: "",
-    breed: "",
+    petName: "",
+    raceId: "",
+    ownerId:1,
     size: "",
     age: "",
-    vaccination_plan: "",
-    care_to_have: "",
+    vaccinationPlan: "",
+    careToHave: "",
   });
 
   function sendForm(){
+    registerPet(formState);
     console.log(formState);
   }
   
@@ -24,12 +27,13 @@ const Register = () => {
           sendForm();
         }}
       >
+        <br/>
         <MDBInput
-          value={formState.name}
+          value={formState.petName}
           onChange={(e) =>
             setFormState({
               ...formState,
-              name: e.target.value,
+              petName: e.target.value,
             })
           }
           label="Nombre de la mascota"
@@ -39,11 +43,11 @@ const Register = () => {
 
         <br />
         <MDBInput
-          value={formState.breed}
+          value={formState.raceId}
           onChange={(e) =>
             setFormState({
               ...formState,
-              breed: e.target.value,
+              raceId: e.target.value,
             })
           }
           label="Raza"
@@ -79,11 +83,11 @@ const Register = () => {
         />
         <br />
         <MDBInput
-          value={formState.vaccination_plan}
+          value={formState.vaccinationPlan}
           onChange={(e) =>
             setFormState({
               ...formState,
-              vaccination_plan: e.target.value,
+              vaccinationPlan: e.target.value,
             })
           }
           label="Plan de vacunación"
@@ -92,11 +96,11 @@ const Register = () => {
         />
         <br />
         <MDBInput
-          value={formState.care_to_have}
+          value={formState.careToHave}
           onChange={(e) =>
             setFormState({
               ...formState,
-              care_to_have: e.target.value,
+              careToHave: e.target.value,
             })
           }
           label="Cuidados a tener"

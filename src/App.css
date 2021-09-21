@@ -2,12 +2,11 @@
   text-align: center;
 }
 
-
-.App-header {
-  position: absolute;
-  bottom: 0rem;
-  width: 100%;
-  /* Mitad de espacio desde el footer y el fondo de ;a pagina */
-  /*height: 50px;*/
- 
+.Body {
+  margin:0;
+  padding:0;  
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:70vh;
 }

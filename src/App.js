@@ -14,6 +14,8 @@ const App = () => {
   return (
     <NavbarHOC>
       
+
+      <div className="Body">
       <Switch>
         <Redirect exact from="/" to="/Home" />
         <Route path="/Register" component={Register} />
@@ -23,12 +25,14 @@ const App = () => {
         <Route path="*" render={() => <p>NO TENGO NADA</p>} />
         
       </Switch>
-
-      <div className="App-header">
-       <Footer/>
       </div>
-      
+ 
+       <Footer/>
+     
+        
     </NavbarHOC>
+
+    
     
   );
 };

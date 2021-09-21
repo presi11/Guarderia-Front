@@ -13,7 +13,7 @@ import {
 } from "./CardPet.elements";
 import Perro from "../../Assets/perro.jpg";
 
-const CardPet = (props) => {
+const CardPet = ({dataPet}) => {
   return (
     <ContainerCard>
 {/* <img src={Perro} alt="" /> */}
@@ -25,24 +25,24 @@ const CardPet = (props) => {
           </NamePetAndAge>
             */}
           <NamePetAndAge age={true} center={true}>
-            15 años
+            {dataPet.age} años
           </NamePetAndAge>
           <ImgContainerPet perro={Perro}/>
-          <NamePetAndAge center={true}>Lucas</NamePetAndAge>
+          <NamePetAndAge center={true}>{dataPet.petName}</NamePetAndAge>
         </PetCard>
         <MoreInfoPet>
-          <h1>Lucas</h1>
+          <h1>{dataPet.petName}</h1>
           <Coords>
-            <span>Raza: Pastor Aleman</span>
+            <span>Raza: {dataPet.race.description}</span>
           </Coords>
           <Coords>
-            <span>Tamaño: Pequeño</span>
+            <span>Tamaño: {dataPet.size}</span>
           </Coords>
           <Coords>
-            <span>Tiene plan de vacunacion: Si</span>
+            <span>Tiene plan de vacunacion: {dataPet.vaccinationPlan}</span>
           </Coords>
           <Coords>
-            <span>Cuidados</span>
+            <span>Cuidados: {dataPet.careToHave}</span>
           </Coords>
           <ContainerList>
             
@@ -53,7 +53,7 @@ const CardPet = (props) => {
         </MoreInfoPet>
       </Aditional>
       <PetDescription>
-        <h1>Lucas</h1>
+        <h1>{dataPet.petName}</h1>
         <p>
           Perro color caka con ojos saltones, le gusta robar zapatos y dañarlos
         </p>

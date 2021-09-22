@@ -12,22 +12,28 @@ import {
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
+import { editPet } from "../../services/PetService";
+import EditComplete from "../Modalforms/EditComplete"
 
 const EditPet = ({ gridModal, setGridModal, data }) => {
   const toggleShow = () => setGridModal(!gridModal);
+  
+
   const [formState, setFormState] = useState({
     petName: data.petName,
     raceId: data.raceId,
-    ownerId: 1,
+    ownerId: 14,
     size: data.size,
     age: data.age,
     vaccinationPlan: data.vaccinationPlan,
     careToHave: data.careToHave,
   });
 
-  function sendUpdate() {
+   function sendUpdate() {
     console.log(formState);
+    editPet(formState, data.id);
   }
+  const [completeModal, setcompleteModal] = useState(false);
   return (
     <>
       <MDBModal
@@ -38,7 +44,7 @@ const EditPet = ({ gridModal, setGridModal, data }) => {
         <MDBModalDialog>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Editar a {data.petName}</MDBModalTitle>
+              <MDBModalTitle>Editar a {data.id}</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"
@@ -49,7 +55,8 @@ const EditPet = ({ gridModal, setGridModal, data }) => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  sendUpdate();
+                  setcompleteModal(!completeModal);
+         
                 }}
               >
                 <br />
@@ -66,7 +73,6 @@ const EditPet = ({ gridModal, setGridModal, data }) => {
                   type="text"
                 />
                 <br />
-
                 <FormControl fullWidth>
                   <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Raza
@@ -85,7 +91,6 @@ const EditPet = ({ gridModal, setGridModal, data }) => {
                     <option value={2}>Pastor Berga</option>
                   </NativeSelect>
                 </FormControl>
-
                 <br />
                 <br />
                 <MDBInput
@@ -139,15 +144,20 @@ const EditPet = ({ gridModal, setGridModal, data }) => {
                   id="formControlDefault"
                   type="text"
                 />
-
                 <br />
                 <MDBBtn color="secondary" onClick={toggleShow}>
-                  Close
+                  Cancelar
                 </MDBBtn>
-                <MDBBtn type="submit" onClick={sendUpdate()}>
-                  Save changes
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <MDBBtn type="submit" onClick={sendUpdate}>
+                  Guardar cambios
                 </MDBBtn>
               </form>
+              <EditComplete
+                data={formState.petName}
+                completeModal={completeModal}
+                setcompleteModal={setcompleteModal}
+              ></EditComplete>
             </MDBModalBody>
           </MDBModalContent>
         </MDBModalDialog>

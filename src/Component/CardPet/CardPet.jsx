@@ -72,6 +72,8 @@ const CardPet = ({ dataPet }) => {
 
       <MDBBtn onClick={toggleShow}>Editar</MDBBtn>
       <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet>
+      
+  
     </>
   );
 };

@@ -82,13 +82,13 @@ const NavbarHOC = ({ children }) => {
                     Acerca de
                   </MDBNavbarLink>
                 </MDBNavbarItem>
-                {localStorage.getItem("access_token") ? (
                 <MDBNavbarItem>
+                {localStorage.getItem("access_token") ? (
                   <MDBNavbarLink onClick={() => redirect("MePets")}>
                     Mis Mascotas
                   </MDBNavbarLink>
-                </MDBNavbarItem>
                 ) : null}
+                </MDBNavbarItem>
               </MDBNavbarNav>
             </div>
           </MDBContainer>

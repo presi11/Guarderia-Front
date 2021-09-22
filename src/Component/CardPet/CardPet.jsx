@@ -11,9 +11,13 @@ import {
   Coords,
   ContainerList,
 } from "./CardPet.elements";
-import { MDBBtn } from "mdb-react-ui-kit";
 import Perro from "../../Assets/perro.jpg";
-import EditPet from "./EditPet";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { Stack } from "@mui/material";
+//import EditPet from "./EditPet";
+import CompleteFormPet from "../Modalforms/CompleteFormPet"
 
 const CardPet = ({ dataPet }) => {
   const [gridModal, setGridModal] = useState(false);
@@ -69,11 +73,16 @@ const CardPet = ({ dataPet }) => {
           <Help>Pasa el mouse por encima de la foto para mas informacion</Help>
         </PetDescription>
       </ContainerCard>
-
-      <MDBBtn onClick={toggleShow}>Editar</MDBBtn>
-      <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet>
-      
-  
+      <Stack direction="row" spacing={2}>
+        <Button color="error" variant="contained" startIcon={<DeleteIcon />}>
+          Eliminar
+        </Button>
+        <Button variant="contained" startIcon={<EditIcon />}>
+          Editar
+        </Button>
+      </Stack>
+      <CompleteFormPet></CompleteFormPet>
+      {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
     </>
   );
 };

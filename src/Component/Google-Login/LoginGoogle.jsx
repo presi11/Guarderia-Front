@@ -30,6 +30,7 @@ const LoginGoogle = () => {
   
       }else {
         window.localStorage.setItem("access_token", resp.data.access_token);
+        window.localStorage.setItem("email", email);
         history.push("/MePets");
         window.location.reload(false)
       }

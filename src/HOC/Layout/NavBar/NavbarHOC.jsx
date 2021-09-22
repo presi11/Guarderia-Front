@@ -18,6 +18,7 @@ import LoginGoogle from "../../../Component/Google-Login/LoginGoogle";
 const NavbarHOC = ({ children }) => {
   const [showNavColorSecond, setShowNavColorSecond] = useState(false);
 
+  
   const history = useHistory();
   const redirect = (route) => history.push(`/${route}`);
 
@@ -81,11 +82,13 @@ const NavbarHOC = ({ children }) => {
                     Acerca de
                   </MDBNavbarLink>
                 </MDBNavbarItem>
+                {localStorage.getItem("access_token") ? (
                 <MDBNavbarItem>
                   <MDBNavbarLink onClick={() => redirect("MePets")}>
                     Mis Mascotas
                   </MDBNavbarLink>
                 </MDBNavbarItem>
+                ) : null}
               </MDBNavbarNav>
             </div>
           </MDBContainer>

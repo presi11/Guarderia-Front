@@ -1,142 +1,154 @@
-import React, { useState } from "react";
-import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
-import { registerPet } from "../../services/PetService";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
-import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
-
-const Register = () => {
+import React, { useState, Fragment } from "react";
+import {
+  Grid,
+  TextField,
+  Button,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
+import { registerPet, editPet} from '../../services/PetService'
+const Register = (props) => {
   
-  const [formState, setFormState] = useState({
+  const defaultValues= {
     petName: "",
-    raceId: "",
+    raceId: 1,
     ownerId: 1,
-    size: "",
+    size: "Pequeño",
     age: "",
     vaccinationPlan: "",
     careToHave: "",
-  });
-
-  function sendForm() {
-    registerPet(formState);
-    console.log(formState);
-  }
-  const mystyle = {
-    width: "23rem",
   };
 
-  const [gridModal, setGridModal] = useState(false);
+  const [sizePet, setSizePet] = useState('Pequeño');
+  const [raceId, setRaceId] = useState(0)
+  const { register, handleSubmit, control , reset} = useForm({defaultValues});
+
+  const handleChange = (event) => {
+    setSizePet(event.target.value);
+    console.log(sizePet);
+  };
+  const handleChangeRaceId = (event) => {
+    setRaceId(event.target.value);
+    console.log(raceId);
+  };
+  
+  const onSubmit = (data) => {
+    data.age= parseInt(data.age, 10)
+    data.raceId= parseInt(data.raceId, 10)
+    if(props.data){
+      editPet(data);
+    }else{
+      registerPet(data).then((res)=>{
+        if(res.status===200){
+          reset(defaultValues)
+        }
+      });
+    }
+    console.log(data)
+  };
+
   return (
-    <section class="border d-flex justify-content-center p-4 mb-4">
-      <div style={mystyle}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            sendForm();
-            setGridModal(!gridModal);
-          }}
+    <Fragment>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
         >
-          <br />
-          <MDBInput
-            value={formState.petName}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                petName: e.target.value,
-              })
-            }
-            label="Nombre de la mascota"
-            id="formControlDefault"
-            type="text"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="petName"
+            label="Nombre de la Mascota"
+            name="petName"
+            autoFocus
+            defaultValue={props.data?props.data.petName:""}
+            {...register("petName")}
           />
-
-          <br />
-
-          <FormControl fullWidth>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-              Raza
-            </InputLabel>
-            <NativeSelect
-              value={formState.raceId}
-              onChange={(e) =>
-                setFormState({
-                  ...formState,
-                  raceId: e.target.value,
-                })
-              }
-            >
-
-              <option value={4}>Mestiza</option>
-              <option value={1}>Chiwawa</option>
-              <option value={2}>Pastor Berga</option>
-            </NativeSelect>
-          </FormControl>
-
-          <br />
-          <br />
-          <MDBInput
-            value={formState.size}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                size: e.target.value,
-              })
-            }
-            label="Tamaño"
-            id="formControlDefault"
-            type="text"
+          <Controller
+            control={control}
+            name="raceId"
+            render={() => (
+              <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
+                <InputLabel id="raceId">Seleccione su tamaño</InputLabel>
+                <Select
+                  label="state"
+                  variant="filled"
+                  defaultValue={1}
+                  onChange={handleChangeRaceId}
+                  {...register("raceId")}
+                >
+                  <MenuItem value={4}>Mestiza</MenuItem>
+                  <MenuItem value={1}>Chiguawa</MenuItem>
+                  <MenuItem value={2}>Pastor Velga</MenuItem>
+                </Select>
+              </FormControl>
+            )}
           />
-          <br />
-          <MDBInput
-            tvalue={formState.age}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                age: e.target.value,
-              })
-            }
+          
+          <Controller
+            control={control}
+            name="size"
+            render={() => (
+              <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
+                <InputLabel id="size">Seleccione su tamaño</InputLabel>
+                <Select
+                  label="state"
+                  variant="filled"
+                  defaultValue="Pequeño"
+                  onChange={handleChange}
+                  {...register("size")}
+                >
+                  <MenuItem value="Pequeño">Pequeño</MenuItem>
+                  <MenuItem value="Mediano">Mediano</MenuItem>
+                  <MenuItem value="Grande">Grande</MenuItem>
+                </Select>
+              </FormControl>
+            )}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="age"
             label="Edad"
-            id="formControlDefault"
-            type="text"
+            name="age"
+            type="number"
+            defaultValue={props.data?props.data.age:""}
+            {...register("age")}
           />
-          <br />
-          <MDBInput
-            value={formState.vaccinationPlan}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                vaccinationPlan: e.target.value,
-              })
-            }
-            label="Plan de vacunación"
-            id="formControlDefault"
-            type="text"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="vaccinationPlan"
+            label="Plan de vacunacion"
+            name="vaccinationPlan"
+            defaultValue={props.data?props.data.vaccinationPlan:""}
+            {...register("vaccinationPlan")}
           />
-          <br />
-          <MDBInput
-            value={formState.careToHave}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                careToHave: e.target.value,
-              })
-            }
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="careToHave"
             label="Cuidados a tener"
-            id="formControlDefault"
-            type="text"
+            name="careToHave"
+            defaultValue={props.data?props.data.careToHave:""}
+            {...register("careToHave")}
           />
 
-          <br />
-          <MDBBtn type="submit">Ingresar</MDBBtn>
-        </form>
-      </div>
-      <CompleteFormPet
-          data={formState.petName}
-          gridModal={gridModal}
-          setGridModal={setGridModal}
-        ></CompleteFormPet>
-    </section>
+          <Button size="medium" type="submit" variant="contained">
+            {props.edit ? "Guardar cambios" : "Guardar"}
+          </Button>
+        </Grid>
+      </form>
+    </Fragment>
   );
 };
 

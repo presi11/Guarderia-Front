@@ -1,18 +1,20 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Grid,
   TextField,
   Button,
 } from "@mui/material";
-/* import { registerPet, editPet } from "../../services/PetService"; */
+import { registerPet, editPet } from "../../services/PetService"; 
 import { useForm, Form } from "../../Component/Form/Form";
 import Control from '../../Component/Control/Control';
+import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
+
 
 const defaultValues = {
   petName: "",
   raceId: 1,
-  ownerId: 1,
-  size: "Pequeño",
+  ownerId: 14,
+  size: 1,
   age: "",
   vaccinationPlan: "",
   careToHave: "",
@@ -24,7 +26,15 @@ const raceIdPet = ()=>([
   { id:"3", title:"Pastor Velga"},
 ])
 
+const sizeIdPet = ()=>([
+  { id:"1", title:"Pequeño"},
+  { id:"2", title:"Mediano"},
+  { id:"3", title:"Grande"},
+])
+
 const Register = (props) => {
+
+  const [open, setOpen] = React.useState(false);
   const { addOrEdit, dataForEdit } = props;
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
@@ -39,15 +49,27 @@ const Register = (props) => {
     /* setErrors */ handleInputChange,
     resetForm,
   } = useForm(defaultValues, true, validate);
-
+  
   const handleSubmit = (e) => {
+   
     e.preventDefault();
+    
+    registerPet(values).then((resp) =>{
+      if (resp.status === 200){
+        setOpen(!open);
+        if (open){
+        
+      }
+      } 
+    });
     if (validate() && addOrEdit) {
       addOrEdit(values, resetForm);
       console.log(values)
     }
     console.log(values)
   };
+
+
 
   useEffect(() => {
     if (dataForEdit != null) {
@@ -88,18 +110,16 @@ const Register = (props) => {
               options={raceIdPet()}
               errors={errors.raceId}
             />
-            <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            id="size"
-            label="Tamaño de la mascota"
-            name="size"
-            autoFocus
-            value={values.size}
-            onChange={handleInputChange}
-            errors={errors.size}
-          />
+            <br/>
+            
+            <Control.Select
+              name="size"
+              label="Tamaño"
+              value={values.size}
+              onChange={handleInputChange}
+              options={sizeIdPet()}
+              errors={errors.size}
+            />
           <TextField
             variant="outlined"
             margin="normal"
@@ -141,6 +161,7 @@ const Register = (props) => {
           </Button>
         </Grid>
       </Form>
+      <CompleteFormPet  open = { open} setOpen = {setOpen}></CompleteFormPet>
     </Fragment>
   );
 };

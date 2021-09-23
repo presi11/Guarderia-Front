@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const APIURL = "https://springback.azurewebsites.net/api/v1/pet"
-/* const APIURL = "http://localhost:8091/api/v1/pet"; */
+//const APIURL = "https://springback.azurewebsites.net/api/v1/pet"
+ const APIURL = "http://localhost:8091/api/v1/pet"; 
 
 export const registerPet = async (data) => {
   const tokenId = window.localStorage.getItem("access_token");

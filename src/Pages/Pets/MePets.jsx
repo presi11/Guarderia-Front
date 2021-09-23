@@ -4,20 +4,19 @@ import { getPets } from "../../services/PetService";
 
 const MePets = () => {
 
-   const [pets, setpets] = useState([])
+  const [pets, setpets] = useState([]);
+  const [statusCode, setStatusCode] = useState(0)
   useEffect(() => {
     getPets().then((pets)=>{
+      setStatusCode(pets.status);
       setpets(pets.data)
-      
     })
   }, [setpets]) 
 
-  
-
   return (
     <>
-
-       <MePetsgrid pet = {pets}></MePetsgrid> 
+    {statusCode===200?(<MePetsgrid pet = {pets}></MePetsgrid>):null}
+      {/* <MePetsgrid pet = {pets}></MePetsgrid> */}
     </>
   );
 };

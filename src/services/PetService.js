@@ -61,7 +61,7 @@ export const getPets = async () => {
         "Content-Type": "application/json",
       },
     };
-  
+    console.log(idpet)
     const response = await axios.delete(`${APIURL}/${idpet}`,  config);
     
     return response;

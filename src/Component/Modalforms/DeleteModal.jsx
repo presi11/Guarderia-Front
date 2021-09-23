@@ -8,17 +8,21 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import { deletePet } from "../../services/PetService";
 
-const DeleteModal = ({ open, setOpen, data }) => {
+const DeleteModal = ({ open, setOpen, data, setMyPets, myPets }) => {
 
 
 
   const handleClose = () => {
     setOpen(false);
   };
+  
   function handleCloseDelete () {
-    deletePet(data.id);
+    const position = myPets.indexOf(data)
+    setMyPets(myPets.splice(position, 1))
+    deletePet(data.id)
+      
     setOpen(false);
-    window.location.reload(false);
+    //window.location.reload(false);
   };
 
   return (

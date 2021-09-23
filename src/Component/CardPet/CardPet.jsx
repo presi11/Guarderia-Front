@@ -17,18 +17,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
-import CompleteFormPet from "../Modalforms/CompleteFormPet"
+
 import ModalDialog from '../Modalforms/ModalDialog'
 import EditPet from '../../Pages/Pets/EditPet'
 
+import DeleteModal from '../Modalforms/DeleteModal'
+
 const CardPet = ({ dataPet }) => {
-  const [gridModal, setGridModal] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
   const [dataEdit, setDataEdit] = useState(null);
-
-  function toggleShow() {
-    setGridModal(!gridModal);
-  }
 
 
   const addOrEdit = (pet, resetForm) => { 
@@ -108,8 +106,9 @@ const CardPet = ({ dataPet }) => {
       >
         <EditPet dataForEdit={dataEdit} addOrEdit={addOrEdit} edit={true}/>
       </ModalDialog>
-      <CompleteFormPet></CompleteFormPet>
+
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
+      <DeleteModal  open = {open} setOpen = {setOpen} data ={dataPet}></DeleteModal>
     </>
   );
 };

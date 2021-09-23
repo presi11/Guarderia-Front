@@ -11,7 +11,7 @@ const MePets = () => {
       setStatusCode(pets.status);
       setpets(pets.data)
     })
-  }, [setpets])
+  }, [setpets]) 
 
   return (
     <>

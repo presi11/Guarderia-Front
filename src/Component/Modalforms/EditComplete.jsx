@@ -9,7 +9,8 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-import { useHistory } from "react-router-dom";
+
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuDialogContent-root": {
@@ -49,14 +50,13 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const CompleteFormPet = ({ open, setOpen, data }) => {
-  const history = useHistory();
-
+const EditComplete = ({ open, setOpen, data }) => {
+ 
   const handleClose = () => {
+    
     setOpen(false);
-    history.push("/MePets");
+    window.location.reload(false);
   };
-
   return (
     <div>
       <BootstrapDialog
@@ -68,11 +68,11 @@ const CompleteFormPet = ({ open, setOpen, data }) => {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Registro de mascota
+          Editor de mascota
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            Se agrego correctamente a {data} Nos alegra tenerte :)
+            Se actualizo correctamente a {data}
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -85,4 +85,4 @@ const CompleteFormPet = ({ open, setOpen, data }) => {
   );
 };
 
-export default CompleteFormPet;
+export default EditComplete;

@@ -11,16 +11,41 @@ import {
   Coords,
   ContainerList,
 } from "./CardPet.elements";
-import { MDBBtn } from "mdb-react-ui-kit";
 import Perro from "../../Assets/perro.jpg";
-import EditPet from "./EditPet";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { Stack } from "@mui/material";
+//import EditPet from "./EditPet";
+
+import ModalDialog from '../Modalforms/ModalDialog'
+import EditPet from '../../Pages/Pets/EditPet'
+
+import DeleteModal from '../Modalforms/DeleteModal'
 
 const CardPet = ({ dataPet }) => {
-  const [gridModal, setGridModal] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
+  const [dataEdit, setDataEdit] = useState(null);
 
-  function toggleShow() {
-    setGridModal(!gridModal);
+
+  const addOrEdit = (pet, resetForm) => { 
+    resetForm();
+    setDataEdit(null);
+    setOpenEditOrAdd(false);
+    
+  };
+
+  function showModal() {
+    setOpen(!open);
   }
+  const openModal = (item) => {
+    setDataEdit(item);
+    setOpenEditOrAdd(true);
+  };
+
+
+  
   return (
     <>
       <ContainerCard>
@@ -69,9 +94,24 @@ const CardPet = ({ dataPet }) => {
           <Help>Pasa el mouse por encima de la foto para mas informacion</Help>
         </PetDescription>
       </ContainerCard>
+      <Stack direction="row" spacing={2}>
+        <Button color="error" variant="contained" startIcon={<DeleteIcon />} onClick={showModal}>
+          Eliminar
+        </Button>
+        <Button variant="contained" startIcon={<EditIcon />} onClick={() => {openModal(dataPet);}}>
+          Editar
+        </Button>
+      </Stack>
+      <ModalDialog
+        title="Editar una mascota"
+        openModal={openEditOrAdd}
+        setOpenModal={setOpenEditOrAdd}
+      >
+        <EditPet dataForEdit={dataEdit} addOrEdit={addOrEdit} edit={setOpenEditOrAdd}/>
+      </ModalDialog>
 
-      <MDBBtn onClick={toggleShow}>Editar</MDBBtn>
-      <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet>
+      {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
+      <DeleteModal  open = {open} setOpen = {setOpen} data ={dataPet}></DeleteModal>
     </>
   );
 };

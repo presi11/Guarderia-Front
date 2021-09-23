@@ -36,6 +36,9 @@ const CardPet = ({ dataPet }) => {
     
   };
 
+  function showModal() {
+    setOpen(!open);
+  }
   const openModal = (item) => {
     setDataEdit(item);
     setOpenEditOrAdd(true);
@@ -92,7 +95,7 @@ const CardPet = ({ dataPet }) => {
         </PetDescription>
       </ContainerCard>
       <Stack direction="row" spacing={2}>
-        <Button color="error" variant="contained" startIcon={<DeleteIcon />}>
+        <Button color="error" variant="contained" startIcon={<DeleteIcon />} onClick={showModal}>
           Eliminar
         </Button>
         <Button variant="contained" startIcon={<EditIcon />} onClick={() => {openModal(dataPet);}}>
@@ -104,7 +107,7 @@ const CardPet = ({ dataPet }) => {
         openModal={openEditOrAdd}
         setOpenModal={setOpenEditOrAdd}
       >
-        <EditPet dataForEdit={dataEdit} addOrEdit={addOrEdit} edit={true}/>
+        <EditPet dataForEdit={dataEdit} addOrEdit={addOrEdit} edit={setOpenEditOrAdd}/>
       </ModalDialog>
 
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}

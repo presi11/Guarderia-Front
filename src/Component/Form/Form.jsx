@@ -2,6 +2,9 @@ import React, {Fragment, useState} from 'react';
 import {makeStyles} from '@mui/styles'
 
 export function useForm(initialFValues, validateOnChange= false, validate){
+    initialFValues.size=parseInt(initialFValues.size,10)
+ 
+    
     const [values, setValues] = useState(initialFValues);
     const [errors, setErrors] = useState({});
 
@@ -41,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Form = (props) => {
     const styles = useStyles();
+
     const {children, ...others} = props
     return (
         <Fragment>

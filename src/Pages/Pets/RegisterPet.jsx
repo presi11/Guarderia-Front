@@ -8,7 +8,7 @@ import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
 const defaultValues = {
   petName: "",
   raceId: 1,
-  ownerId: 4,
+  ownerId: 14,
   size: 1,
   age: "",
   vaccinationPlan: "",
@@ -16,9 +16,9 @@ const defaultValues = {
 };
 
 const raceIdPet = () => [
-  { id: "1", title: "Mestiza" },
-  { id: "2", title: "Chiwuawa" },
-  { id: "3", title: "Pastor Velga" },
+  { id: "4", title: "Mestiza" },
+  { id: "1", title: "Chiwuawa" },
+  { id: "2", title: "Pastor Velga" },
 ];
 
 const sizeIdPet = () => [
@@ -31,7 +31,6 @@ const Register = (props) => {
   const [open, setOpen] = React.useState(false);
   const { addOrEdit, dataForEdit, edit } = props;
   
-  console.log(dataForEdit)
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
 
@@ -48,22 +47,31 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    values.size=parseInt(values.size,10)
-    values.raceId=parseInt(values.raceId,10)
+    const petRegister = {
+      petName: values.petName,
+      raceId: values.raceId,
+      ownerId: 14,
+      size: values.size,
+      age: values.age,
+      vaccinationPlan: values.vaccinationPlan,
+      careToHave: values.careToHave,
+    }
+
     if (validate() && edit) {
       addOrEdit(values, resetForm);
       editPet(values);
-      console.log(values);
+
     }else{
-      registerPet(values).then((resp) => {
+      registerPet(petRegister).then((resp) => {
         if (resp.status === 200) {
+
           setOpen(!open);
           if (open) {
           }
         }
       });
     }
-    console.log(values);
+
   };
 
   useEffect(() => {
@@ -155,7 +163,7 @@ const Register = (props) => {
           </Button>
         </Grid>
       </Form>
-      <CompleteFormPet open={open} setOpen={setOpen}></CompleteFormPet>
+      <CompleteFormPet open={open} setOpen={setOpen}  data={values.petName}></CompleteFormPet>
     </Fragment>
   );
 };

@@ -18,6 +18,7 @@ const DeleteModal = ({ open, setOpen, data }) => {
   function handleCloseDelete () {
     deletePet(data.id);
     setOpen(false);
+    window.location.reload(false);
   };
 
   return (

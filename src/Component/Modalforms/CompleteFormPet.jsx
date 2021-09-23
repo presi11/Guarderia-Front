@@ -1,21 +1,21 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router-dom";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuDialogContent-root': {
+  "& .MuDialogContent-root": {
     padding: theme.spacing(2),
   },
-  '& .MuDialogActions-root': {
+  "& .MuDialogActions-root": {
     padding: theme.spacing(1),
   },
 }));
@@ -31,7 +31,7 @@ const BootstrapDialogTitle = (props) => {
           aria-label="close"
           onClick={onClose}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             right: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
@@ -49,11 +49,10 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const CompleteFormPet = ({open ,setOpen}) => {
+const CompleteFormPet = ({ open, setOpen, data }) => {
   const history = useHistory();
 
   const handleClose = () => {
-    
     setOpen(false);
     history.push("/MePets");
   };
@@ -65,33 +64,25 @@ const CompleteFormPet = ({open ,setOpen}) => {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modal title
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+        >
+          Registro de mascota
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-            magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
-            ullamcorper nulla non metus auctor fringilla.
+            Se agrego correctamente a {data} Nos alegra tenerte :)
           </Typography>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            Save changes
+            Aceptar
           </Button>
         </DialogActions>
       </BootstrapDialog>
     </div>
   );
-}
+};
 
 export default CompleteFormPet;

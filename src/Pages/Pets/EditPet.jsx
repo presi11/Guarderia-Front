@@ -3,14 +3,12 @@ import { Grid, TextField, Button } from "@mui/material";
 import { editPet } from "../../services/PetService";
 import { useForm, Form } from "../../Component/Form/Form";
 import Control from "../../Component/Control/Control";
-import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
-
-
+import EditComplete from "../../Component/Modalforms/EditComplete";
 
 const raceIdPet = () => [
-  { id: "1", title: "Mestiza" },
-  { id: "2", title: "Chiwuawa" },
-  { id: "3", title: "Pastor Velga" },
+  { id: "4", title: "Mestiza" },
+  { id: "1", title: "Chiwuawa" },
+  { id: "2", title: "Pastor Velga" },
 ];
 
 const sizeIdPet = () => [
@@ -22,23 +20,45 @@ const sizeIdPet = () => [
 const EditPet = (props) => {
   const [open, setOpen] = React.useState(false);
   const { dataForEdit } = props;
+
+  const dataValues = {
+    petName: dataForEdit.petName,
+    raceId: dataForEdit.race.id,
+    ownerId: dataForEdit.owner.id,
+    size: dataForEdit.size,
+    age: dataForEdit.age,
+    vaccinationPlan: dataForEdit.vaccinationPlan,
+    careToHave: dataForEdit.careToHave,
+  };
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     return Object.values(temp).every((x) => x === "");
   };
 
-  const {
-    values,
-    errors,
-    handleInputChange,
-  } = useForm(dataForEdit, true, validate);
+  const { values, errors, handleInputChange } = useForm(
+    dataValues,
+    true,
+    validate
+  );
 
   const handleSubmit = (e) => {
+    const dataValues = {
+      petName: values.petName,
+      raceId: values.raceId,
+      ownerId: values.ownerId,
+      size: values.size,
+      age: values.age,
+      vaccinationPlan: values.vaccinationPlan,
+      careToHave: values.careToHave,
+    };
     e.preventDefault();
-    values.size=parseInt(values.size,10)
-    values.raceId=parseInt(values.raceId,10)
-    editPet(values);
-    console.log(values);
+    editPet(dataValues, dataForEdit.id);
+  
+      setOpen(!open);
+
+
+    
   };
   return (
     <Fragment>
@@ -121,7 +141,11 @@ const EditPet = (props) => {
           </Button>
         </Grid>
       </Form>
-      <CompleteFormPet open={open} setOpen={setOpen}></CompleteFormPet>
+      <EditComplete
+        open={open}
+        setOpen={setOpen}
+        data={values.petName}
+      ></EditComplete>
     </Fragment>
   );
 };

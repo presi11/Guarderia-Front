@@ -4,20 +4,20 @@ import { getPets } from "../../services/PetService";
 
 const MePets = () => {
 
-  const [pets, setpets] = useState([])
+   const [pets, setpets] = useState([])
   useEffect(() => {
     getPets().then((pets)=>{
       setpets(pets.data)
       
     })
-  }, [setpets])
+  }, [setpets]) 
 
-  console.log(pets);
   
 
   return (
     <>
-      <MePetsgrid pet = {pets}></MePetsgrid>
+
+       <MePetsgrid pet = {pets}></MePetsgrid> 
     </>
   );
 };

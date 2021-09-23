@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
+export const Colors={
+  primary: '#0314E0',
+  backGroundPetCard: '#0994ED'
+}
+
+const {backGroundPetCard} = Colors
+
 export const ContainerCard = styled.div`
   width: 450px;
   height: 250px;
   background-color: #fff;
-  background: linear-gradient(#ffa900, #fff);
+  background: linear-gradient( ${backGroundPetCard}, #fff);
   box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
   overflow: hidden;
@@ -19,7 +26,7 @@ export const Aditional = styled.div`
   position: absolute;
   width: 150px;
   height: 100%;
-  background: linear-gradient(#ffa900, #ffa900);
+  background: linear-gradient(${backGroundPetCard}, ${backGroundPetCard});
   transition: width 0.4s;
   overflow: hidden;
   z-index: 2;

@@ -1,19 +1,9 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import { registerPet, editPet } from "../../services/PetService";
+import { editPet } from "../../services/PetService";
 import { useForm, Form } from "../../Component/Form/Form";
 import Control from "../../Component/Control/Control";
-import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
-
-const defaultValues = {
-  petName: "",
-  raceId: 1,
-  ownerId: 14,
-  size: 1,
-  age: "",
-  vaccinationPlan: "",
-  careToHave: "",
-};
+import EditComplete from "../../Component/Modalforms/EditComplete";
 
 const raceIdPet = () => [
   { id: "4", title: "Mestiza" },
@@ -27,61 +17,49 @@ const sizeIdPet = () => [
   { id: "3", title: "Grande" },
 ];
 
-const Register = (props) => {
+const EditPet = (props) => {
   const [open, setOpen] = React.useState(false);
-  const { addOrEdit, dataForEdit, edit } = props;
-  
+  const { dataForEdit } = props;
+
+  const dataValues = {
+    petName: dataForEdit.petName,
+    raceId: dataForEdit.race.id,
+    ownerId: dataForEdit.owner.id,
+    size: dataForEdit.size,
+    age: dataForEdit.age,
+    vaccinationPlan: dataForEdit.vaccinationPlan,
+    careToHave: dataForEdit.careToHave,
+  };
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-
     return Object.values(temp).every((x) => x === "");
   };
 
-  const {
-    values,
-    setValues,
-    errors,
-    /* setErrors */ handleInputChange,
-    resetForm,
-  } = useForm(defaultValues, true, validate);
+  const { values, errors, handleInputChange } = useForm(
+    dataValues,
+    true,
+    validate
+  );
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const petRegister = {
+    const dataValues = {
       petName: values.petName,
       raceId: values.raceId,
-      ownerId: 14,
+      ownerId: values.ownerId,
       size: values.size,
       age: values.age,
       vaccinationPlan: values.vaccinationPlan,
       careToHave: values.careToHave,
-    }
+    };
+    e.preventDefault();
+    editPet(dataValues, dataForEdit.id);
+  
+      setOpen(!open);
 
-    if (validate() && edit) {
-      addOrEdit(values, resetForm);
-      editPet(values);
 
-    }else{
-      registerPet(petRegister).then((resp) => {
-        if (resp.status === 200) {
-
-          setOpen(!open);
-          if (open) {
-          }
-        }
-      });
-    }
-
+    
   };
-
-  useEffect(() => {
-    if (dataForEdit != null) {
-      setValues({
-        ...dataForEdit,
-      });
-    }
-  }, [setValues, dataForEdit]);
-
   return (
     <Fragment>
       <Form onSubmit={handleSubmit}>
@@ -163,9 +141,13 @@ const Register = (props) => {
           </Button>
         </Grid>
       </Form>
-      <CompleteFormPet open={open} setOpen={setOpen}  data={values.petName}></CompleteFormPet>
+      <EditComplete
+        open={open}
+        setOpen={setOpen}
+        data={values.petName}
+      ></EditComplete>
     </Fragment>
   );
 };
 
-export default Register;
+export default EditPet;

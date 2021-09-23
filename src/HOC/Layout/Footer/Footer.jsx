@@ -9,16 +9,15 @@ import {faInstagramSquare} from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   return (
-    <MDBFooter bgColor='warning' className='text-white text-lg-left'>
-      <MDBContainer className='p-4'>
+    <MDBFooter bgColor='warning' className='text-white text-lg-left' >
+      <MDBContainer className='p-2 mb-0' >
         <MDBRow >
           <MDBCol lg='6' md='12' className='text-center mb-4 mb-md-0'>
-            <h5 className='text-uppercase'>Footer Content</h5>
+            <h5 className='text-uppercase'>Vision</h5>
 
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias.
-              Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam, est
-              atque cumque eum delectus sint!
+             En Pexshop siempre estamos para brindarle a tu mascota la mejor atencion y el cuidado dentro de nuestras amplias instalaciones, 
+             no dejes el cuidado de tus mascotas a cualquiera, dejalo todo en manos de Pexshop lideres en la atencion y cuidaro para tu perro.
             </p>
           </MDBCol>
 
@@ -26,7 +25,7 @@ const Footer = () => {
           </MDBCol>
 
           <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-            <h5 className='text-uppercase mb-0'>Links</h5>
+            <h5 className='text-uppercase mb-2'>Social Media</h5>
 
             <ul className='list-unstyled'>
               <li>
@@ -66,11 +65,11 @@ const Footer = () => {
         </MDBRow>
       </MDBContainer>
 
-      <div className='text-center p-3' style={{ backgroundcolor: 'rgba(0, 0, 0, 0.2)' }}>
+      <div className='text-center p-1' style={{ backgroundcolor: 'rgba(0, 0, 0, 0.2)' }}>
         &copy; {new Date().getFullYear()} Copyright:{' '}
-        <a className='text-white' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
-        </a>
+        <p>
+          Ingenieria de Software
+        </p>
       </div>
     </MDBFooter>
   );

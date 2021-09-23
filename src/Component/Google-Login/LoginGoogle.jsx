@@ -2,28 +2,40 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { loginAxios } from "../../services/loginService";
+import { registerUser } from "../../services/registerUser";
 
 const LoginGoogle = () => {
 
   const history = useHistory();
   const responseGoogle = (response) => {
     const { email, googleId } = response.profileObj;
-
+    console.log(response);
     const data = {
       email,
       googleId,
     };
+
+    const register = {
+      userName:email,
+      password:googleId,
+    };
+
+
     loginAxios(data).then((resp) => {
-      if (resp.status === 200) {
+      if (resp.status === 401) {
        
+        
+        
+        registerUser(register)
+  
+      }else {
         window.localStorage.setItem("access_token", resp.data.access_token);
+        window.localStorage.setItem("email", email);
         history.push("/MePets");
         window.location.reload(false)
-      }else{
-        
       }
       
-    });
+    }).catch(error => registerUser(register)) ;
   };
   return (
     <>

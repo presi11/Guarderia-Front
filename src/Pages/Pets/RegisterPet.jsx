@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
   Grid,
   TextField,
   Button,
 } from "@mui/material";
-import { registerPet, editPet } from "../../services/PetService"; 
+import { registerPet } from "../../services/PetService"; 
 import { useForm, Form } from "../../Component/Form/Form";
 import Control from '../../Component/Control/Control';
 import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";

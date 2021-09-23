@@ -17,20 +17,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
-import CompleteFormPet from "../Modalforms/CompleteFormPet"
+
 import ModalDialog from '../Modalforms/ModalDialog'
 import RegisterPet from '../../Pages/Pets/RegisterPet'
 
+import DeleteModal from '../Modalforms/DeleteModal'
+
 const CardPet = ({ dataPet }) => {
-  const [gridModal, setGridModal] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
-  function toggleShow() {
-    setGridModal(!gridModal);
+
+
+  function showModal() {
+    setOpen(!open);
   }
 
-  const openModalEditPet= ()=>{
+/*   const openModalEditPet= ()=>{
     setOpenEditOrAdd(true)
-  }
+  } */
   return (
     <>
       <ContainerCard>
@@ -80,7 +84,7 @@ const CardPet = ({ dataPet }) => {
         </PetDescription>
       </ContainerCard>
       <Stack direction="row" spacing={2}>
-        <Button color="error" variant="contained" startIcon={<DeleteIcon />}>
+        <Button color="error" variant="contained" startIcon={<DeleteIcon />} onClick={showModal}>
           Eliminar
         </Button>
         <Button variant="contained" startIcon={<EditIcon />} onClick={()=>setOpenEditOrAdd(true)}>
@@ -94,8 +98,9 @@ const CardPet = ({ dataPet }) => {
       >
         <RegisterPet  />
       </ModalDialog>
-      <CompleteFormPet></CompleteFormPet>
+
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
+      <DeleteModal  open = {open} setOpen = {setOpen} data ={dataPet}></DeleteModal>
     </>
   );
 };

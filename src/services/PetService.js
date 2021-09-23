@@ -50,3 +50,19 @@ export const getPets = async () => {
     
     return response;
   };
+
+  export const deletePet = async ( idpet) => {
+    const tokenId = window.localStorage.getItem("access_token");
+    //Usuario para pruebas en local
+    //const user = `username=chorro&password=quevivanloshorro&grant_type=password`
+    const config = {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+        "Content-Type": "application/json",
+      },
+    };
+  
+    const response = await axios.delete(`${APIURL}/${idpet}`,  config);
+    
+    return response;
+  };

@@ -9,11 +9,16 @@ const useStyles = makeStyles((theme) => ({
     dialogWraper:{
         padding: theme.spacing,
         position: 'absolute',
-        
+        width:'600px',
+        '& .MuiFormControl-root':{
+            width:'60%',
+            margin: theme.spacing
+        },
     },
     dialogTitle:{
         paddingRigth:'0px'
-    }
+    },
+    
 }))
 
 const ModalDialog = (props) => {
@@ -21,7 +26,7 @@ const ModalDialog = (props) => {
     const styles = useStyles();
 
     return (
-        <Dialog open={openModal} maxWidth="md" classes={{paper: styles.dialogWraper}}>
+        <Dialog open={openModal} sx={{ width: '100%' }} classes={{paper: styles.dialogWraper}}>
             <DialogTitle className={styles.dialogTitle}>
                 <div style={{display: 'flex'}}>
                     <Typography variant="h6" component='div' style={{flexGrow: 1}}>

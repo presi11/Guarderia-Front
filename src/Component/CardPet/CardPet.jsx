@@ -19,18 +19,32 @@ import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
 import CompleteFormPet from "../Modalforms/CompleteFormPet"
 import ModalDialog from '../Modalforms/ModalDialog'
-import RegisterPet from '../../Pages/Pets/RegisterPet'
+import EditPet from '../../Pages/Pets/EditPet'
 
 const CardPet = ({ dataPet }) => {
   const [gridModal, setGridModal] = useState(false);
   const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
+  const [dataEdit, setDataEdit] = useState(null);
+
   function toggleShow() {
     setGridModal(!gridModal);
   }
 
-  const openModalEditPet= ()=>{
-    setOpenEditOrAdd(true)
-  }
+
+  const addOrEdit = (pet, resetForm) => { 
+    resetForm();
+    setDataEdit(null);
+    setOpenEditOrAdd(false);
+    
+  };
+
+  const openModal = (item) => {
+    setDataEdit(item);
+    setOpenEditOrAdd(true);
+  };
+
+
+  
   return (
     <>
       <ContainerCard>
@@ -83,7 +97,7 @@ const CardPet = ({ dataPet }) => {
         <Button color="error" variant="contained" startIcon={<DeleteIcon />}>
           Eliminar
         </Button>
-        <Button variant="contained" startIcon={<EditIcon />} onClick={()=>setOpenEditOrAdd(true)}>
+        <Button variant="contained" startIcon={<EditIcon />} onClick={() => {openModal(dataPet);}}>
           Editar
         </Button>
       </Stack>
@@ -92,7 +106,7 @@ const CardPet = ({ dataPet }) => {
         openModal={openEditOrAdd}
         setOpenModal={setOpenEditOrAdd}
       >
-        <RegisterPet  />
+        <EditPet dataForEdit={dataEdit} addOrEdit={addOrEdit} edit={true}/>
       </ModalDialog>
       <CompleteFormPet></CompleteFormPet>
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}

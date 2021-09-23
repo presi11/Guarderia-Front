@@ -1,19 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { Grid, TextField, Button } from "@mui/material";
-import { registerPet, editPet } from "../../services/PetService";
+import { editPet } from "../../services/PetService";
 import { useForm, Form } from "../../Component/Form/Form";
 import Control from "../../Component/Control/Control";
 import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
 
-const defaultValues = {
-  petName: "",
-  raceId: 1,
-  ownerId: 4,
-  size: 1,
-  age: "",
-  vaccinationPlan: "",
-  careToHave: "",
-};
+
 
 const raceIdPet = () => [
   { id: "1", title: "Mestiza" },
@@ -27,53 +19,27 @@ const sizeIdPet = () => [
   { id: "3", title: "Grande" },
 ];
 
-const Register = (props) => {
+const EditPet = (props) => {
   const [open, setOpen] = React.useState(false);
-  const { addOrEdit, dataForEdit, edit } = props;
-  
-  console.log(dataForEdit)
+  const { dataForEdit } = props;
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-
     return Object.values(temp).every((x) => x === "");
   };
 
   const {
     values,
-    setValues,
     errors,
-    /* setErrors */ handleInputChange,
-    resetForm,
-  } = useForm(defaultValues, true, validate);
+    handleInputChange,
+  } = useForm(dataForEdit, true, validate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     values.size=parseInt(values.size,10)
     values.raceId=parseInt(values.raceId,10)
-    if (validate() && edit) {
-      addOrEdit(values, resetForm);
-      editPet(values);
-      console.log(values);
-    }else{
-      registerPet(values).then((resp) => {
-        if (resp.status === 200) {
-          setOpen(!open);
-          if (open) {
-          }
-        }
-      });
-    }
+    editPet(values);
     console.log(values);
   };
-
-  useEffect(() => {
-    if (dataForEdit != null) {
-      setValues({
-        ...dataForEdit,
-      });
-    }
-  }, [setValues, dataForEdit]);
-
   return (
     <Fragment>
       <Form onSubmit={handleSubmit}>
@@ -160,4 +126,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default EditPet;

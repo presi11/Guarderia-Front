@@ -18,12 +18,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
 import CompleteFormPet from "../Modalforms/CompleteFormPet"
+import ModalDialog from '../Modalforms/ModalDialog'
+import RegisterPet from '../../Pages/Pets/RegisterPet'
 
 const CardPet = ({ dataPet }) => {
   const [gridModal, setGridModal] = useState(false);
-
+  const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
   function toggleShow() {
     setGridModal(!gridModal);
+  }
+
+  const openModalEditPet= ()=>{
+    setOpenEditOrAdd(true)
   }
   return (
     <>
@@ -77,10 +83,17 @@ const CardPet = ({ dataPet }) => {
         <Button color="error" variant="contained" startIcon={<DeleteIcon />}>
           Eliminar
         </Button>
-        <Button variant="contained" startIcon={<EditIcon />}>
+        <Button variant="contained" startIcon={<EditIcon />} onClick={()=>setOpenEditOrAdd(true)}>
           Editar
         </Button>
       </Stack>
+      <ModalDialog
+        title="Editar una mascota"
+        openModal={openEditOrAdd}
+        setOpenModal={setOpenEditOrAdd}
+      >
+        <RegisterPet  />
+      </ModalDialog>
       <CompleteFormPet></CompleteFormPet>
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
     </>

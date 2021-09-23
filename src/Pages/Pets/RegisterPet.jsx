@@ -1,58 +1,66 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
   Grid,
   TextField,
   Button,
-  FormControl,
-  Select,
-  MenuItem,
-  InputLabel,
 } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
-import { registerPet, editPet} from '../../services/PetService'
+/* import { registerPet, editPet } from "../../services/PetService"; */
+import { useForm, Form } from "../../Component/Form/Form";
+import Control from '../../Component/Control/Control';
+
+const defaultValues = {
+  petName: "",
+  raceId: 1,
+  ownerId: 1,
+  size: "Pequeño",
+  age: "",
+  vaccinationPlan: "",
+  careToHave: "",
+};
+
+const raceIdPet = ()=>([
+  { id:"1", title:"Mestiza"},
+  { id:"2", title:"Chiwuawa"},
+  { id:"3", title:"Pastor Velga"},
+])
+
 const Register = (props) => {
-  
-  const defaultValues= {
-    petName: "",
-    raceId: 1,
-    ownerId: 1,
-    size: "Pequeño",
-    age: "",
-    vaccinationPlan: "",
-    careToHave: "",
+  const { addOrEdit, dataForEdit } = props;
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors };
+
+    return Object.values(temp).every((x) => x === "");
   };
 
-  const [sizePet, setSizePet] = useState('Pequeño');
-  const [raceId, setRaceId] = useState(0)
-  const { register, handleSubmit, control , reset} = useForm({defaultValues});
+  const {
+    values,
+    setValues,
+    errors,
+    /* setErrors */ handleInputChange,
+    resetForm,
+  } = useForm(defaultValues, true, validate);
 
-  const handleChange = (event) => {
-    setSizePet(event.target.value);
-    console.log(sizePet);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate() && addOrEdit) {
+      addOrEdit(values, resetForm);
+      console.log(values)
+    }
+    console.log(values)
   };
-  const handleChangeRaceId = (event) => {
-    setRaceId(event.target.value);
-    console.log(raceId);
-  };
-  
-  const onSubmit = (data) => {
-    data.age= parseInt(data.age, 10)
-    data.raceId= parseInt(data.raceId, 10)
-    if(props.data){
-      editPet(data);
-    }else{
-      registerPet(data).then((res)=>{
-        if(res.status===200){
-          reset(defaultValues)
-        }
+
+  useEffect(() => {
+    if (dataForEdit != null) {
+      setValues({
+        ...dataForEdit,
       });
     }
-    console.log(data)
-  };
+  }, [setValues, dataForEdit]);
+
 
   return (
     <Fragment>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit}>
         <Grid
           container
           direction="column"
@@ -67,49 +75,30 @@ const Register = (props) => {
             label="Nombre de la Mascota"
             name="petName"
             autoFocus
-            defaultValue={props.data?props.data.petName:""}
-            {...register("petName")}
+            value={values.petName}
+            onChange={handleInputChange}
+            errors={errors.petName}
           />
-          <Controller
-            control={control}
-            name="raceId"
-            render={() => (
-              <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
-                <InputLabel id="raceId">Seleccione su tamaño</InputLabel>
-                <Select
-                  label="state"
-                  variant="filled"
-                  defaultValue={1}
-                  onChange={handleChangeRaceId}
-                  {...register("raceId")}
-                >
-                  <MenuItem value={4}>Mestiza</MenuItem>
-                  <MenuItem value={1}>Chiguawa</MenuItem>
-                  <MenuItem value={2}>Pastor Velga</MenuItem>
-                </Select>
-              </FormControl>
-            )}
-          />
-          
-          <Controller
-            control={control}
+
+          <Control.Select
+              name="raceId"
+              label="Raza"
+              value={values.raceId}
+              onChange={handleInputChange}
+              options={raceIdPet()}
+              errors={errors.raceId}
+            />
+            <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            id="size"
+            label="Tamaño de la mascota"
             name="size"
-            render={() => (
-              <FormControl variant="filled" sx={{ m: 1, minWidth: 220 }}>
-                <InputLabel id="size">Seleccione su tamaño</InputLabel>
-                <Select
-                  label="state"
-                  variant="filled"
-                  defaultValue="Pequeño"
-                  onChange={handleChange}
-                  {...register("size")}
-                >
-                  <MenuItem value="Pequeño">Pequeño</MenuItem>
-                  <MenuItem value="Mediano">Mediano</MenuItem>
-                  <MenuItem value="Grande">Grande</MenuItem>
-                </Select>
-              </FormControl>
-            )}
+            autoFocus
+            value={values.size}
+            onChange={handleInputChange}
+            errors={errors.size}
           />
           <TextField
             variant="outlined"
@@ -118,9 +107,10 @@ const Register = (props) => {
             id="age"
             label="Edad"
             name="age"
-            type="number"
-            defaultValue={props.data?props.data.age:""}
-            {...register("age")}
+            autoFocus
+            value={values.age}
+            onChange={handleInputChange}
+            errors={errors.age}
           />
           <TextField
             variant="outlined"
@@ -129,8 +119,10 @@ const Register = (props) => {
             id="vaccinationPlan"
             label="Plan de vacunacion"
             name="vaccinationPlan"
-            defaultValue={props.data?props.data.vaccinationPlan:""}
-            {...register("vaccinationPlan")}
+            autoFocus
+            value={values.vaccinationPlan}
+            onChange={handleInputChange}
+            errors={errors.vaccinationPlan}
           />
           <TextField
             variant="outlined"
@@ -139,15 +131,16 @@ const Register = (props) => {
             id="careToHave"
             label="Cuidados a tener"
             name="careToHave"
-            defaultValue={props.data?props.data.careToHave:""}
-            {...register("careToHave")}
+            autoFocus
+            value={values.careToHave}
+            onChange={handleInputChange}
+            errors={errors.careToHave}
           />
-
           <Button size="medium" type="submit" variant="contained">
-            {props.edit ? "Guardar cambios" : "Guardar"}
+            {props.data ? "Guardar cambios" : "Guardar"}
           </Button>
         </Grid>
-      </form>
+      </Form>
     </Fragment>
   );
 };

@@ -12,6 +12,7 @@ const LogoutGoogle = ({logout}) => {
     buttonText="Logout"
     onLogoutSuccess={logout}
   ></GoogleLogout>;
+  
 };
 
 export default LogoutGoogle;

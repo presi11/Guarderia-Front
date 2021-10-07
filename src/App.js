@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import NavbarHOC from "./HOC/Layout/NavBar/NavbarHOC";
+
 /* import Footer from "./HOC/Layout/Footer/Footer";
 
 

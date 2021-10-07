@@ -17,14 +17,31 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
-import CompleteFormPet from "../Modalforms/CompleteFormPet"
 
-const CardPet = ({ dataPet }) => {
-  const [gridModal, setGridModal] = useState(false);
+import ModalDialog from "../Modalforms/ModalDialog";
+import EditPet from "../../Pages/Pets/EditPet";
 
-  function toggleShow() {
-    setGridModal(!gridModal);
+import DeleteModal from "../Modalforms/DeleteModal";
+
+const CardPet = ({ dataPet, setMyPets, myPets, pet }) => {
+  const [open, setOpen] = React.useState(false);
+  const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
+  const [dataEdit, setDataEdit] = useState(null);
+
+  const addOrEdit = (pet, resetForm) => {
+    resetForm();
+    setDataEdit(null);
+    setOpenEditOrAdd(false);
+  };
+
+  function showModal() {
+    setOpen(!open);
   }
+  const openModal = (item) => {
+    setDataEdit(item);
+    setOpenEditOrAdd(true);
+  };
+
   return (
     <>
       <ContainerCard>
@@ -74,15 +91,45 @@ const CardPet = ({ dataPet }) => {
         </PetDescription>
       </ContainerCard>
       <Stack direction="row" spacing={2}>
-        <Button color="error" variant="contained" startIcon={<DeleteIcon />}>
+        <Button
+          color="error"
+          variant="contained"
+          startIcon={<DeleteIcon />}
+          onClick={showModal}
+        >
           Eliminar
         </Button>
-        <Button variant="contained" startIcon={<EditIcon />}>
+        <Button
+          variant="contained"
+          startIcon={<EditIcon />}
+          onClick={() => {
+            openModal(dataPet);
+          }}
+        >
           Editar
         </Button>
       </Stack>
-      <CompleteFormPet></CompleteFormPet>
+      <ModalDialog
+        title="Editar una mascota"
+        openModal={openEditOrAdd}
+        setOpenModal={setOpenEditOrAdd}
+      >
+        <EditPet
+          dataForEdit={dataEdit}
+          addOrEdit={addOrEdit}
+          edit={setOpenEditOrAdd}
+        />
+      </ModalDialog>
+
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
+      <DeleteModal
+        open={open}
+        setOpen={setOpen}
+        data={dataPet}
+        setMyPets={setMyPets}
+        myPets={myPets}
+        pet={pet}
+      ></DeleteModal>
     </>
   );
 };

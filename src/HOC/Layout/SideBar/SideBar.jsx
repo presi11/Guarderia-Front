@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   SideBarContainer,
   CloseIconContainer,
@@ -35,12 +35,19 @@ const SideBar = ({ isOpen, setIsOpen }) => {
           <SideBarLink to="Home" onClick={() => closeSideBarHandle()}>
             Inicio
           </SideBarLink>
-          <SideBarLink to="Register" onClick={() => closeSideBarHandle()}>
-            Registrar
-          </SideBarLink>
-          <SideBarLink to="MePets" onClick={() => closeSideBarHandle()}>
-            Mis Mascotas
-          </SideBarLink>
+          {localStorage.getItem("access_token") ? (
+            <Fragment>
+              <SideBarLink to="Register" onClick={() => closeSideBarHandle()}>
+                Registrar
+              </SideBarLink>
+              <SideBarLink to="MePets" onClick={() => closeSideBarHandle()}>
+                Mis Mascotas
+              </SideBarLink>
+              <SideBarLink to="Classroom" onClick={() => closeSideBarHandle()}>
+                Aula
+              </SideBarLink>
+            </Fragment>
+          ) : null}
         </SideBarMenu>
         <SideBtnWrap>
           {!localStorage.getItem("access_token") ? (

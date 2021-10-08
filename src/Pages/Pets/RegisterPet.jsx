@@ -50,7 +50,7 @@ const Register = (props) => {
     const petRegister = {
       petName: values.petName,
       raceId: values.raceId,
-      ownerId: 14,
+      ownerId: 4,
       size: values.size,
       age: values.age,
       vaccinationPlan: values.vaccinationPlan,

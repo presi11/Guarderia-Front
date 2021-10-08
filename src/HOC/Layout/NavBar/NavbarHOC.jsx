@@ -10,7 +10,7 @@ import {
   NavLink,
   NavMenu,
 } from "./NavBarElements";
-import SideBar from '../SideBar/SideBar'
+import SideBar from "../SideBar/SideBar";
 
 const NavbarHOC = ({ children }) => {
   const history = useHistory();
@@ -35,23 +35,30 @@ const NavbarHOC = ({ children }) => {
         <Bars onClick={() => isOpenClick()} />
         <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
         <NavMenu>
+          <NavLink to="/home">Inicio</NavLink>
           {localStorage.getItem("access_token") ? (
             <Fragment>
-              <NavLink to="/home">Inicio</NavLink>
               <NavLink to="/Register">Registrar</NavLink>
               <NavLink to="/MePets">Mis Mascotas</NavLink>
+              <NavLink to="/Classroom">Aula</NavLink>
             </Fragment>
           ) : null}
         </NavMenu>
         <NavBtn>
-        {!localStorage.getItem("access_token") ? (
+          {!localStorage.getItem("access_token") ? (
             <LoginGoogle> login</LoginGoogle>
           ) : null}
-        {localStorage.getItem("access_token") ? (
+          {localStorage.getItem("access_token") ? (
             <GoogleLogout
               clientId="103162145817-vq4hiompm6h9k073nihc2a9foeft3e7b.apps.googleusercontent.com"
-              render={renderProps=>(
-                <LoginBtnLink variant="outlined" onClick={renderProps.onClick} disabled={renderProps.disabled} >LogOut</LoginBtnLink>
+              render={(renderProps) => (
+                <LoginBtnLink
+                  variant="outlined"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                >
+                  LogOut
+                </LoginBtnLink>
               )}
               buttonText="Logout"
               onLogoutSuccess={logOut}

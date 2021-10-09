@@ -44,7 +44,7 @@ const SideBar = ({ isOpen, setIsOpen }) => {
                 Mis Mascotas
               </SideBarLink>
               <SideBarLink to="Classroom" onClick={() => closeSideBarHandle()}>
-                Aula
+                Agenda
               </SideBarLink>
             </Fragment>
           ) : null}

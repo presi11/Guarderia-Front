@@ -40,7 +40,7 @@ const NavbarHOC = ({ children }) => {
             <Fragment>
               <NavLink to="/Register">Registrar</NavLink>
               <NavLink to="/MePets">Mis Mascotas</NavLink>
-              <NavLink to="/Classroom">Aula</NavLink>
+              <NavLink to="/Classroom">Agenda</NavLink>
             </Fragment>
           ) : null}
         </NavMenu>

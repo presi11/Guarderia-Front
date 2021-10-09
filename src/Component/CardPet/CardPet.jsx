@@ -17,15 +17,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
-
-import ModalDialog from "../Modalforms/ModalDialog";
-import EditPet from "../../Pages/Pets/EditPet";
+import ApproveModal from "../Modalforms/ApproveModal";
+import ModalDialog from '../Modalforms/ModalDialog'
+import EditPet from '../../Pages/Pets/EditPet'
 
 import DeleteModal from "../Modalforms/DeleteModal";
 
-const CardPet = ({ dataPet, setMyPets, myPets, pet }) => {
-  const [open, setOpen] = React.useState(false);
-  const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
+const CardPet = ({ dataPet }) => {
+  const [open, setOpen] = useState(false);
+  const [openEditOrAdd, setOpenEditOrAdd] = useState(false); 
+  const [openApprove, setOpenApprove] = useState(false);
   const [dataEdit, setDataEdit] = useState(null);
 
   const addOrEdit = (pet, resetForm) => {
@@ -36,6 +37,10 @@ const CardPet = ({ dataPet, setMyPets, myPets, pet }) => {
 
   function showModal() {
     setOpen(!open);
+  }
+
+  function showModalApprove() {
+    setOpenApprove(!openApprove);
   }
   const openModal = (item) => {
     setDataEdit(item);
@@ -108,6 +113,9 @@ const CardPet = ({ dataPet, setMyPets, myPets, pet }) => {
         >
           Editar
         </Button>
+        <Button variant="contained" startIcon={<EditIcon />} onClick={showModalApprove}>
+          Aprobar
+        </Button>
       </Stack>
       <ModalDialog
         title="Editar una mascota"
@@ -122,14 +130,9 @@ const CardPet = ({ dataPet, setMyPets, myPets, pet }) => {
       </ModalDialog>
 
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
-      <DeleteModal
-        open={open}
-        setOpen={setOpen}
-        data={dataPet}
-        setMyPets={setMyPets}
-        myPets={myPets}
-        pet={pet}
-      ></DeleteModal>
+      <DeleteModal  open = {open} setOpen = {setOpen} data ={dataPet}></DeleteModal>
+
+      <ApproveModal open = {openApprove} setOpen = {setOpenApprove} data ={dataPet}></ApproveModal>
     </>
   );
 };

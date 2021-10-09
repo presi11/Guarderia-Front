@@ -9,6 +9,7 @@ import PetAdmin from "./Pages/Admin/Director/PetAdmin"; */
 import Register from "./Pages/Pets/RegisterPet";
 import Home from "./Pages/Home/Home";
 import MePets from "./Pages/Pets/MePets";
+import ApprovePet from "./Pages/Approve/ApprovePet";
 import AsigClasroom from './Pages/Admin/Empleado/AsigClasroom'
 import "./App.css";
 
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/Home" component={Home} />
           <Route path="/MePets" component={MePets} />
           <Route path="/Register" component={Register} />
+          <Route path="/ApprovePet" component={ApprovePet} />
           <Route path="/Classroom" component={AsigClasroom} />
           <Route path="*" render={() => <p>NO TENGO NADA</p>} />
         </Switch>

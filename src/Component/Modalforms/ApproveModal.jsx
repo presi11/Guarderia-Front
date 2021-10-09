@@ -6,31 +6,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { deletePet } from "../../services/PetService";
+//import { deletePet } from "../../services/PetService";
 
-const DeleteModal = ({ open, setOpen, data, setMyPets, myPets, pet }) => {
+const ApproveModal = ({ open, setOpen, data }) => {
 
 
 
   const handleClose = () => {
     setOpen(false);
   };
-  
   function handleCloseDelete () {
-    const position = myPets.indexOf(data)
-    console.log(position);
-    console.log(myPets[position]);
-
-    let pets = myPets.splice((position, 1));
-    console.log(pets);
-    setMyPets(pets);
-    console.log(myPets);
-    //setMyPets(myPets)
-
-    deletePet(data.id)
-      
+    //deletePet(data.id);
     setOpen(false);
-    //window.location.reload(false);
+    window.location.reload(false);
   };
 
   return (
@@ -46,7 +34,7 @@ const DeleteModal = ({ open, setOpen, data, setMyPets, myPets, pet }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Desea elimar a {data.petName}
+            Desea aceptar a {data.petName}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -60,4 +48,4 @@ const DeleteModal = ({ open, setOpen, data, setMyPets, myPets, pet }) => {
   );
 }
 
-export default DeleteModal;
+export default ApproveModal;

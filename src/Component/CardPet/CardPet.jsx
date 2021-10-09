@@ -17,15 +17,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Stack } from "@mui/material";
 //import EditPet from "./EditPet";
-
+import ApproveModal from "../Modalforms/ApproveModal";
 import ModalDialog from '../Modalforms/ModalDialog'
 import EditPet from '../../Pages/Pets/EditPet'
 
 import DeleteModal from '../Modalforms/DeleteModal'
 
 const CardPet = ({ dataPet }) => {
+ 
   const [open, setOpen] = React.useState(false);
-  const [openEditOrAdd, setOpenEditOrAdd] = useState(false);
+  const [openEditOrAdd, setOpenEditOrAdd] = useState(false); 
+  const [openApprove, setOpenApprove] = useState(false);
   const [dataEdit, setDataEdit] = useState(null);
 
 
@@ -38,6 +40,10 @@ const CardPet = ({ dataPet }) => {
 
   function showModal() {
     setOpen(!open);
+  }
+
+  function showModalApprove() {
+    setOpenApprove(!openApprove);
   }
   const openModal = (item) => {
     setDataEdit(item);
@@ -101,6 +107,9 @@ const CardPet = ({ dataPet }) => {
         <Button variant="contained" startIcon={<EditIcon />} onClick={() => {openModal(dataPet);}}>
           Editar
         </Button>
+        <Button variant="contained" startIcon={<EditIcon />} onClick={showModalApprove}>
+          Aprobar
+        </Button>
       </Stack>
       <ModalDialog
         title="Editar una mascota"
@@ -112,6 +121,8 @@ const CardPet = ({ dataPet }) => {
 
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
       <DeleteModal  open = {open} setOpen = {setOpen} data ={dataPet}></DeleteModal>
+
+      <ApproveModal openApprove = {openApprove} setOpenApprove = {setOpenApprove} data ={dataPet}></ApproveModal>
     </>
   );
 };

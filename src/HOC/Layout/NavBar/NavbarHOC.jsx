@@ -52,6 +52,9 @@ const NavbarHOC = ({ children }) => {
             <IconButton color="inherit" onClick={() => redirect("MePets")}>
               Mis mascotas
             </IconButton>
+            <IconButton color="inherit" onClick={() => redirect("ApprovePet")}>
+              Aprobar
+            </IconButton>
           </div>
         ): null}
       </Toolbar>

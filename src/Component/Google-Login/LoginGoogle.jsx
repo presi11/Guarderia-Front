@@ -3,9 +3,10 @@ import GoogleLogin from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { loginAxios } from "../../services/loginService";
 import { registerUser } from "../../services/registerUser";
+import {LoginBtnLink} from '../../HOC/Layout/NavBar/NavBarElements'
+import GoogleIcon from '@mui/icons-material/Google';
 
 const LoginGoogle = () => {
-
   const history = useHistory();
   const responseGoogle = (response) => {
     const { email, googleId } = response.profileObj;
@@ -16,38 +17,35 @@ const LoginGoogle = () => {
     };
 
     const register = {
-      userName:email,
-      password:googleId,
+      userName: email,
+      password: googleId,
     };
 
-
-    loginAxios(data).then((resp) => {
-      if (resp.status === 401) {
-       
-        
-        
-        registerUser(register)
-  
-      }else {
-        window.localStorage.setItem("access_token", resp.data.access_token);
-        window.localStorage.setItem("email", email);
-        history.push("/MePets");
-        window.location.reload(false)
-      }
-      
-    }).catch(error => registerUser(register)) ;
+    loginAxios(data)
+      .then((resp) => {
+        if (resp.status === 401) {
+          registerUser(register);
+        } else {
+          window.localStorage.setItem("access_token", resp.data.access_token);
+          window.localStorage.setItem("email", email);
+          history.push("/MePets");
+          window.location.reload(false);
+        }
+      })
+      .catch((error) => registerUser(register));
   };
   return (
     <>
-    
       <GoogleLogin
         clientId="103162145817-vq4hiompm6h9k073nihc2a9foeft3e7b.apps.googleusercontent.com"
+        render={renderProps=>(
+          <LoginBtnLink variant="outlined" startIcon={<GoogleIcon/>} onClick={renderProps.onClick} disabled={renderProps.disabled} >Login</LoginBtnLink>
+        )}
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={"single_host_origin"}
         isSignedIn={true}
-
       />
     </>
   );

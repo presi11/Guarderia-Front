@@ -43,6 +43,9 @@ const SideBar = ({ isOpen, setIsOpen }) => {
               <SideBarLink to="MePets" onClick={() => closeSideBarHandle()}>
                 Mis Mascotas
               </SideBarLink>
+              <SideBarLink to="ApprovePet" onClick={() => closeSideBarHandle()}>
+                Aprobar
+              </SideBarLink>
               <SideBarLink to="Classroom" onClick={() => closeSideBarHandle()}>
                 Aula
               </SideBarLink>

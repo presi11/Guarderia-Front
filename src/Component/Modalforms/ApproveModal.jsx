@@ -6,25 +6,25 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-import { deletePet } from "../../services/PetService";
+//import { deletePet } from "../../services/PetService";
 
-const ApproveModal = ({ openApprove, setOpenApprove, data }) => {
+const ApproveModal = ({ open, setOpen, data }) => {
 
 
 
   const handleClose = () => {
-    setOpenApprove(false);
+    setOpen(false);
   };
   function handleCloseDelete () {
     //deletePet(data.id);
-    setOpenApprove(false);
+    setOpen(false);
     window.location.reload(false);
   };
 
   return (
     <div>
       <Dialog
-        openApprove={openApprove}
+        open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"

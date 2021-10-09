@@ -21,21 +21,18 @@ import ApproveModal from "../Modalforms/ApproveModal";
 import ModalDialog from '../Modalforms/ModalDialog'
 import EditPet from '../../Pages/Pets/EditPet'
 
-import DeleteModal from '../Modalforms/DeleteModal'
+import DeleteModal from "../Modalforms/DeleteModal";
 
 const CardPet = ({ dataPet }) => {
- 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [openEditOrAdd, setOpenEditOrAdd] = useState(false); 
   const [openApprove, setOpenApprove] = useState(false);
   const [dataEdit, setDataEdit] = useState(null);
 
-
-  const addOrEdit = (pet, resetForm) => { 
+  const addOrEdit = (pet, resetForm) => {
     resetForm();
     setDataEdit(null);
     setOpenEditOrAdd(false);
-    
   };
 
   function showModal() {
@@ -50,8 +47,6 @@ const CardPet = ({ dataPet }) => {
     setOpenEditOrAdd(true);
   };
 
-
-  
   return (
     <>
       <ContainerCard>
@@ -101,10 +96,21 @@ const CardPet = ({ dataPet }) => {
         </PetDescription>
       </ContainerCard>
       <Stack direction="row" spacing={2}>
-        <Button color="error" variant="contained" startIcon={<DeleteIcon />} onClick={showModal}>
+        <Button
+          color="error"
+          variant="contained"
+          startIcon={<DeleteIcon />}
+          onClick={showModal}
+        >
           Eliminar
         </Button>
-        <Button variant="contained" startIcon={<EditIcon />} onClick={() => {openModal(dataPet);}}>
+        <Button
+          variant="contained"
+          startIcon={<EditIcon />}
+          onClick={() => {
+            openModal(dataPet);
+          }}
+        >
           Editar
         </Button>
         <Button variant="contained" startIcon={<EditIcon />} onClick={showModalApprove}>
@@ -116,13 +122,17 @@ const CardPet = ({ dataPet }) => {
         openModal={openEditOrAdd}
         setOpenModal={setOpenEditOrAdd}
       >
-        <EditPet dataForEdit={dataEdit} addOrEdit={addOrEdit} edit={setOpenEditOrAdd}/>
+        <EditPet
+          dataForEdit={dataEdit}
+          addOrEdit={addOrEdit}
+          edit={setOpenEditOrAdd}
+        />
       </ModalDialog>
 
       {/* <EditPet gridModal={gridModal} setGridModal={setGridModal} data = {dataPet}></EditPet> */}
       <DeleteModal  open = {open} setOpen = {setOpen} data ={dataPet}></DeleteModal>
 
-      <ApproveModal openApprove = {openApprove} setOpenApprove = {setOpenApprove} data ={dataPet}></ApproveModal>
+      <ApproveModal open = {openApprove} setOpen = {setOpenApprove} data ={dataPet}></ApproveModal>
     </>
   );
 };

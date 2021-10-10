@@ -5,7 +5,9 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
 import PerroFondo from "../../Assets/PerroFondo.jpg";
+
 const Home = () => {
+
   return (
     <Fragment>
 

@@ -5,6 +5,8 @@ import { loginAxios } from "../../services/loginService";
 import { registerUser } from "../../services/registerUser";
 import {LoginBtnLink} from '../../HOC/Layout/NavBar/NavBarElements'
 import GoogleIcon from '@mui/icons-material/Google';
+import jwt_decode from "jwt-decode";
+
 
 const LoginGoogle = () => {
   const history = useHistory();
@@ -26,8 +28,12 @@ const LoginGoogle = () => {
         if (resp.status === 401) {
           registerUser(register);
         } else {
+          var token = resp.data.access_token;
+          var decoded = jwt_decode(token);
+          
           window.localStorage.setItem("access_token", resp.data.access_token);
           window.localStorage.setItem("email", email);
+          window.localStorage.setItem("authorities", decoded.authorities);
           history.push("/MePets");
           window.location.reload(false);
         }

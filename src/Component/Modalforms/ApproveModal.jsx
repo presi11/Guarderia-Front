@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-//import { deletePet } from "../../services/PetService";
+import { changeStatusPet } from "../../services/PetService";
 
 const ApproveModal = ({ open, setOpen, data }) => {
 
@@ -16,7 +16,7 @@ const ApproveModal = ({ open, setOpen, data }) => {
     setOpen(false);
   };
   function handleCloseDelete () {
-    //deletePet(data.id);
+    changeStatusPet(data.id);
     setOpen(false);
     window.location.reload(false);
   };

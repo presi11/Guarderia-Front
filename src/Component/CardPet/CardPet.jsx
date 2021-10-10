@@ -20,8 +20,10 @@ import { Stack } from "@mui/material";
 import ApproveModal from "../Modalforms/ApproveModal";
 import ModalDialog from '../Modalforms/ModalDialog'
 import EditPet from '../../Pages/Pets/EditPet'
-
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import DeleteModal from "../Modalforms/DeleteModal";
+
+
 
 const CardPet = ({ dataPet }) => {
   const [open, setOpen] = useState(false);
@@ -47,6 +49,7 @@ const CardPet = ({ dataPet }) => {
     setOpenEditOrAdd(true);
   };
 
+  const authoritie = window.localStorage.getItem("authorities")
   return (
     <>
       <ContainerCard>
@@ -96,6 +99,13 @@ const CardPet = ({ dataPet }) => {
         </PetDescription>
       </ContainerCard>
       <Stack direction="row" spacing={2}>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
         <Button
           color="error"
           variant="contained"
@@ -113,9 +123,11 @@ const CardPet = ({ dataPet }) => {
         >
           Editar
         </Button>
-        <Button variant="contained" startIcon={<EditIcon />} onClick={showModalApprove}>
+        {authoritie === "create pet"  && (
+        <Button sx={{background:"#54cf1b", "&:hover":{background:"#43bf11"}}} variant="contained" startIcon={<AssignmentTurnedInIcon />} onClick={showModalApprove}>
           Aprobar
         </Button>
+        )}
       </Stack>
       <ModalDialog
         title="Editar una mascota"

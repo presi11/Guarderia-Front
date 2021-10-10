@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import MePetsgrid from "../../Component/Grid-Pets/GridCards";
-import { getPets } from "../../services/PetService";
+import { getPetPendings } from "../../services/PetService";
 
 const ApprovePet = () => {
     const [pets, setpets] = useState([]);
     const [statusCode, setStatusCode] = useState(0)
     useEffect(() => {
-      getPets().then((pets)=>{
+      getPetPendings().then((pets)=>{
         setStatusCode(pets.status);
         setpets(pets.data)
       })

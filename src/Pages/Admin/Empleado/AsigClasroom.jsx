@@ -17,6 +17,7 @@ const AsigClasroom = () => {
   const [getLoungData, setGetLoungData] = useState([]);
   const [openAgendaModal, setOpenAgendaModal] = useState(false);
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
+  let classRoomID = 0;
 
  useEffect(() => {
     getLoung().then((data)=>{
@@ -79,7 +80,7 @@ const AsigClasroom = () => {
         </Box>
       </Box>
      <AgendaModal open = {openAgendaModal} setOpen = {setOpenAgendaModal} data ={getLoungData}/>
-     <ClassRoomModal open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
+     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + getLoungData.id} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
     </Container>
   );
 };

@@ -4,16 +4,18 @@ import {
   DialogTitle,
   DialogContent,
   Typography,
-  Grid,
-  Container,
-  TextField,
-  Button,
-  CssBaseline,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Control from "../Control/Control";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box } from "@mui/system";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
@@ -30,32 +32,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const rows = [
+  {id: 1, name: 'Batman', owner: 'DC'},
+  {id: 2, name: 'Spiderman', owner: 'Marvel'},
+  {id: 3, name: 'Superman', owner: 'DC'},
+  {id: 4, name: 'Flash', owner: 'DC'},
+  {id: 5, name: 'Wolverine', owner: 'Marvel'},
+  {id: 6, name: 'Hulk', owner: 'Marvel'},
+];
+
 const ClassRoomModal = (props) => {
   const { title, open, setOpen } = props;
   const styles = useStyles();
-  /* const [petOwner, setPetOwner] = useState([]); */
-
-  /*   useEffect(() => {
-    setPetOwner(pets);
-  }, []); */
-
-  /*  const handleClose = () => {
-    setOpen(false);
-  };
-  function handleCloseAgenda() {
-    //deletePet(data.id);
-    setOpen(false);
-  }
- */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
 
   return (
     <Dialog
@@ -80,55 +69,34 @@ const ClassRoomModal = (props) => {
         </div>
       </DialogTitle>
       <DialogContent dividers>
-        <Container component="main">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 3,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography component="h1" variant="h5">
-              Asignación de auqlooo
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <Grid container>
-                <Grid item xs={10}>
-                
-                </Grid>
-                <Grid item xs={2}>
-                  <Button
-                    type="submit"
-                    variant="outlined"
-                    sx={{ mt: 2, mb: 2 }}
-                  >
-                    Buscar
-                  </Button>
-                </Grid>
 
-                {/* <Grid item container xs={12}>
-              {petOwner.map((myPet) => (
-                  <Fragment key={myPet.id}>
-                <Grid item xs={6}>
-                {myPet.petName}
-                  </Grid>
-                  <Grid item xs={6}>
-                  {myPet.aula.id}
-                  </Grid>
-                  </Fragment>
-                  ))} */}
-                {/* </Grid> */}
-              </Grid>
-            </Box>
-          </Box>
-        </Container>
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 300 }} aria-label="caption table">
+        <caption>A basic table example with a caption</caption>
+        <TableHead>
+          <TableRow>
+            <TableCell>Identificacion</TableCell>
+            <TableCell align="left">Macotas</TableCell>
+            <TableCell align="left">Dueño</TableCell>
+            <TableCell align="left">Carbs&nbsp;(g)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell component="th" scope="row">
+                {row.id}
+              </TableCell>
+              <TableCell align="left">{row.name}</TableCell>
+              <TableCell align="left">{row.owner}</TableCell>
+              <TableCell align="left">{row.carbs}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
       </DialogContent>
     </Dialog>
   );

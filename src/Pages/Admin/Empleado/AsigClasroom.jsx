@@ -9,11 +9,14 @@ import { getLoung } from "../../../services/scheduleService";
 import LoungCard from "../../../Component/LoungCard/LoungCard";
 import { Button } from "@mui/material";
 import AgendaModal from '../../../Component/Modalforms/AgendaModal'
+import ClassRoomModal from '../../../Component/Modalforms/ClassRoomModal'
+import { getAllPets } from "../../../services/PetService";
 
 const AsigClasroom = () => {
 
   const [getLoungData, setGetLoungData] = useState([]);
-  const [openAgendaModal, setOpenAgendaModal] = useState(false)
+  const [openAgendaModal, setOpenAgendaModal] = useState(false);
+  const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
 
  useEffect(() => {
     getLoung().then((data)=>{
@@ -24,6 +27,11 @@ const AsigClasroom = () => {
 
   function showModalAgenda() {
     setOpenAgendaModal(!openAgendaModal);
+  }
+
+  function showModalClassRooms() {
+    setOpenAgendaModal(!openClassRoomModal);
+    //getAllPets();
   }
 
   /* const handleSubmit = (event) => {
@@ -60,7 +68,7 @@ const AsigClasroom = () => {
               {getLoungData.map((loung, index) => (
                 <Fragment key={loung.id}>
                   <Grid item sm={6} xs={12} md={4}>
-                  <LoungCard data={loung} showModal={showModalAgenda}/>
+                  <LoungCard data={loung} showModal={showModalAgenda} showModalRooms={showModalClassRooms}/>
 
                   </Grid>
                 </Fragment>
@@ -70,6 +78,7 @@ const AsigClasroom = () => {
         </Box>
       </Box>
      <AgendaModal open = {openAgendaModal} setOpen = {setOpenAgendaModal} data ={getLoungData}/>
+     <ClassRoomModal open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
     </Container>
   );
 };

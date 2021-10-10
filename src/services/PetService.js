@@ -19,7 +19,21 @@ export const registerPet = async (data) => {
   return response;
 };
 
+export const getAllPets = async () => {
+  const tokenId = window.localStorage.getItem("access_token");
+  //Usuario para pruebas en local
+  //const user = `username=chorro&password=quevivanloshorro&grant_type=password`
+  const config = {
+    headers: {
+      Authorization: `Bearer ${tokenId}`,
+    },
+  };
 
+  
+  const response = await axios.get(`${APIURL}`, config);
+  console.log(response.data);
+  return response;
+};
 
 export const getPets = async () => {
     const tokenId = window.localStorage.getItem("access_token");
@@ -30,6 +44,7 @@ export const getPets = async () => {
         Authorization: `Bearer ${tokenId}`,
       },
     };
+
   
     const response = await axios.get(`${APIURL}/owner/${window.localStorage.getItem("email")}`, config);
     return response;

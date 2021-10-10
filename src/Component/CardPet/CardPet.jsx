@@ -47,6 +47,7 @@ const CardPet = ({ dataPet }) => {
     setOpenEditOrAdd(true);
   };
 
+  const authoritie = window.localStorage.getItem("authorities")
   return (
     <>
       <ContainerCard>
@@ -113,9 +114,11 @@ const CardPet = ({ dataPet }) => {
         >
           Editar
         </Button>
+        {authoritie === "create pet"  && (
         <Button variant="contained" startIcon={<EditIcon />} onClick={showModalApprove}>
           Aprobar
         </Button>
+        )}
       </Stack>
       <ModalDialog
         title="Editar una mascota"

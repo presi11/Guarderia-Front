@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 const LoungCard = (props) => {
-    const {data, showModal, showModalRooms} = props
+    const {data, showModal, showModalClassRooms} = props
   return (
     <Card sx={{ maxWidth: 275, backgroundColor: "rgba(81, 209, 246, 0.4)"}}>
       <CardContent>
@@ -31,7 +31,7 @@ const LoungCard = (props) => {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={showModal}>Asignar una mascota</Button>
-        <Button size="small" onClick={showModalRooms}>Ver Mascotas</Button>
+        <Button size="small" onClick={showModalClassRooms}>Ver Mascotas</Button>
       </CardActions>
     </Card>
   );

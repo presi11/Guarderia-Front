@@ -30,7 +30,8 @@ const AsigClasroom = () => {
   }
 
   function showModalClassRooms() {
-    setOpenAgendaModal(!openClassRoomModal);
+    console.log("hola")
+    setOpenClassRoomModal(!openClassRoomModal);
     //getAllPets();
   }
 
@@ -68,7 +69,7 @@ const AsigClasroom = () => {
               {getLoungData.map((loung, index) => (
                 <Fragment key={loung.id}>
                   <Grid item sm={6} xs={12} md={4}>
-                  <LoungCard data={loung} showModal={showModalAgenda} showModalRooms={showModalClassRooms}/>
+                  <LoungCard data={loung} showModal={showModalAgenda} showModalClassRooms={showModalClassRooms}/>
 
                   </Grid>
                 </Fragment>

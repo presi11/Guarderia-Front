@@ -47,7 +47,7 @@ const SideBar = ({ isOpen, setIsOpen }) => {
                 Aprobar
               </SideBarLink>
               <SideBarLink to="Classroom" onClick={() => closeSideBarHandle()}>
-                Aula
+                Agenda
               </SideBarLink>
             </Fragment>
           ) : null}

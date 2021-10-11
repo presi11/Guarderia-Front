@@ -13,21 +13,7 @@ import {
 import SideBar from "../SideBar/SideBar";
 
 const NavbarHOC = ({ children }) => {
-  
-
-  //enum para las authorities
- /* enum OrderStatus {
-    CONFIRMADO,
-    EN_PREPARACION,
-    PREPARADO,
-    ENTREGADO,
-    ANULADO
-}/*
-
-
-
   const history = useHistory();
-  /* const redirect = (route) => history.push(`/${route}`); */
   const [isOpen, setIsOpen] = useState(false);
   const isOpenClick = () => {
     setIsOpen(!isOpen);

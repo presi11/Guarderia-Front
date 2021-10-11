@@ -39,7 +39,7 @@ const NavbarHOC = ({ children }) => {
           <NavLink to="/home">Inicio</NavLink>
           {localStorage.getItem("access_token") ? (
             <Fragment>
-              {(authoritie.includes("create pet")) && (
+              {(authoritie.includes("create_pet")) && (
               <NavLink to="/Register">Registrar</NavLink>
               )}
               {authoritie === "update_pet,delete_pet,list_pets_by_user,create_pet"  && (

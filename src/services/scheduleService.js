@@ -14,3 +14,16 @@ export const getLoung = async ()=>{
     console.log(response.data)
     return response.data;
 }
+
+export const getLoungeSchedules= async ()=>{
+  const tokenId = window.localStorage.getItem("access_token");
+  const config = {
+      headers: {
+        Authorization: `Bearer ${tokenId}`,
+      },
+    };
+  
+  const response = await axios.get(`${APIURL}/schedule/1`, config);
+  console.log(response.data)
+  return response.data;
+}

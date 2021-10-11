@@ -1,21 +1,16 @@
-import React /* {useState, useEffect} */ from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Typography,
-} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Dialog, DialogTitle, DialogContent, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Control from "../Control/Control";
 import CloseIcon from "@mui/icons-material/Close";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { getLoungeSchedules } from "../../services/scheduleService";
 
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
@@ -32,17 +27,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const rows = [
-  {id: 1, name: 'Batman', owner: 'DC'},
-  {id: 2, name: 'Spiderman', owner: 'Marvel'},
-  {id: 3, name: 'Superman', owner: 'DC'},
-  {id: 4, name: 'Flash', owner: 'DC'},
-  {id: 5, name: 'Wolverine', owner: 'Marvel'},
-  {id: 6, name: 'Hulk', owner: 'Marvel'},
+  { id: 1, name: "Batman", owner: "DC" },
+  { id: 2, name: "Spiderman", owner: "Marvel" },
+  { id: 3, name: "Superman", owner: "DC" },
+  { id: 4, name: "Flash", owner: "DC" },
+  { id: 5, name: "Wolverine", owner: "Marvel" },
+  { id: 6, name: "Hulk", owner: "Marvel" },
 ];
 
 const ClassRoomModal = (props) => {
+  const [room, setRoom] = useState([]);
+  useEffect(() => {
+    getLoungeSchedules().then((room)=>{
+      setRoom(room)
+    })
+  }, [setRoom]) 
+
+  console.log(room);
+
   const { title, open, setOpen } = props;
   const styles = useStyles();
 
@@ -69,34 +72,31 @@ const ClassRoomModal = (props) => {
         </div>
       </DialogTitle>
       <DialogContent dividers>
-
-      <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="caption table">
-        <caption>A basic table example with a caption</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell>Identificacion</TableCell>
-            <TableCell align="left">Macotas</TableCell>
-            <TableCell align="left">Dueño</TableCell>
-            <TableCell align="left">Carbs&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.id}
-              </TableCell>
-              <TableCell align="left">{row.name}</TableCell>
-              <TableCell align="left">{row.owner}</TableCell>
-              <TableCell align="left">{row.carbs}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 300 }} aria-label="caption table">
+            <caption>A basic table example with a caption</caption>
+            <TableHead>
+              <TableRow>
+                <TableCell>Identificacion</TableCell>
+                <TableCell align="left">Macotas</TableCell>
+                <TableCell align="left">Dueño</TableCell>
+                <TableCell align="left">Carbs&nbsp;(g)</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {room.map((room, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    {room.pet.petName}
+                  </TableCell>
+                  <TableCell align="left">{room.pet.petName}</TableCell>
+                  <TableCell align="left">felipes</TableCell>
+                  <TableCell align="left">2222</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </DialogContent>
     </Dialog>
   );

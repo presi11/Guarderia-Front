@@ -34,7 +34,15 @@ const LoginGoogle = () => {
           window.localStorage.setItem("access_token", resp.data.access_token);
           window.localStorage.setItem("email", email);
           window.localStorage.setItem("authorities", decoded.authorities);
-          history.push("/MePets");
+          const authoritie = window.localStorage.getItem("authorities")
+          if(authoritie=== "update_pet,delete_pet,list_pets_by_user,create_pet"){
+            history.push("/MePets");
+          }else if(authoritie.includes("accept_pet")){
+            history.push("/ApprovePet");
+          }else if(authoritie.includes("schedule_pet")){
+            history.push("/Classroom");
+          }
+          
           window.location.reload(false);
         }
       })

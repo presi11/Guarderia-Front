@@ -106,6 +106,7 @@ const CardPet = ({ dataPet }) => {
       &nbsp;
       &nbsp;
       &nbsp;
+      {authoritie.includes("create_pet")  && (
         <Button
           color="error"
           variant="contained"
@@ -114,6 +115,8 @@ const CardPet = ({ dataPet }) => {
         >
           Eliminar
         </Button>
+         )}
+        {authoritie.includes("create_pet")  && (
         <Button
           variant="contained"
           startIcon={<EditIcon />}
@@ -123,7 +126,8 @@ const CardPet = ({ dataPet }) => {
         >
           Editar
         </Button>
-        {authoritie === "create pet"  && (
+         )}
+        {authoritie.includes("accept_pet")  && (
         <Button sx={{background:"#54cf1b", "&:hover":{background:"#43bf11"}}} variant="contained" startIcon={<AssignmentTurnedInIcon />} onClick={showModalApprove}>
           Aprobar
         </Button>

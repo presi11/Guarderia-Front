@@ -27,15 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const rows = [
-  { id: 1, name: "Batman", owner: "DC" },
-  { id: 2, name: "Spiderman", owner: "Marvel" },
-  { id: 3, name: "Superman", owner: "DC" },
-  { id: 4, name: "Flash", owner: "DC" },
-  { id: 5, name: "Wolverine", owner: "Marvel" },
-  { id: 6, name: "Hulk", owner: "Marvel" },
-];
-
 const ClassRoomModal = (props) => {
   const [room, setRoom] = useState([]);
   useEffect(() => {

@@ -14,7 +14,6 @@ import SideBar from "../SideBar/SideBar";
 
 const NavbarHOC = ({ children }) => {
   const history = useHistory();
-  /* const redirect = (route) => history.push(`/${route}`); */
   const [isOpen, setIsOpen] = useState(false);
   const isOpenClick = () => {
     setIsOpen(!isOpen);
@@ -40,7 +39,7 @@ const NavbarHOC = ({ children }) => {
           <NavLink to="/home">Inicio</NavLink>
           {localStorage.getItem("access_token") ? (
             <Fragment>
-              {(authoritie.includes("create pet")) && (
+              {(authoritie.includes("create_pet")) && (
               <NavLink to="/Register">Registrar</NavLink>
               )}
               {authoritie === "update_pet,delete_pet,list_pets_by_user,create_pet"  && (
@@ -50,8 +49,8 @@ const NavbarHOC = ({ children }) => {
               <NavLink to="/ApprovePet">Aprobar</NavLink>
               )}
               {authoritie.includes("schedule_pet")  && (
-                <NavLink to="/Classroom">Aula</NavLink>
-                )} 
+              <NavLink to="/Classroom">Aula</NavLink>
+              )}
             </Fragment>
           ) : null}
         </NavMenu>

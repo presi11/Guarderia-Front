@@ -24,7 +24,6 @@ const EditPet = (props) => {
   const dataValues = {
     petName: dataForEdit.petName,
     raceId: dataForEdit.race.id,
-    ownerId: dataForEdit.owner.id,
     size: dataForEdit.size,
     age: dataForEdit.age,
     vaccinationPlan: dataForEdit.vaccinationPlan,
@@ -46,7 +45,6 @@ const EditPet = (props) => {
     const dataValues = {
       petName: values.petName,
       raceId: values.raceId,
-      ownerId: values.ownerId,
       size: values.size,
       age: values.age,
       vaccinationPlan: values.vaccinationPlan,

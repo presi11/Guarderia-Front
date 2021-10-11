@@ -35,8 +35,6 @@ const ClassRoomModal = (props) => {
     })
   }, [setRoom]) 
 
-  console.log(room);
-
   const { title, open, setOpen } = props;
   const styles = useStyles();
 
@@ -65,24 +63,24 @@ const ClassRoomModal = (props) => {
       <DialogContent dividers>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 300 }} aria-label="caption table">
-            <caption>A basic table example with a caption</caption>
+            <caption></caption>
             <TableHead>
               <TableRow>
                 <TableCell>Identificacion</TableCell>
-                <TableCell align="left">Macotas</TableCell>
-                <TableCell align="left">Dueño</TableCell>
-                <TableCell align="left">Carbs&nbsp;(g)</TableCell>
+                <TableCell align="left">Nombre de la Mascota</TableCell>
+                <TableCell align="left">Tamaño</TableCell>
+                <TableCell align="left">Cuidados</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {room.map((room, index) => (
                 <TableRow key={index}>
                   <TableCell component="th" scope="row">
-                    {room.pet.petName}
+                    {room.pet.id}
                   </TableCell>
                   <TableCell align="left">{room.pet.petName}</TableCell>
-                  <TableCell align="left">felipes</TableCell>
-                  <TableCell align="left">2222</TableCell>
+                  <TableCell align="left">{room.pet.size}</TableCell>
+                  <TableCell align="left">{room.pet.careToHave}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -25,7 +25,8 @@ export const getLoungeSchedules= async ()=>{
     };
   
   const response = await axios.get(`${APIURL}schedule/1`, config);
-  console.log(response.data)
+  console.log('Aulas')
+  console.log( response.data)
   return response.data;
 }
 
@@ -38,6 +39,5 @@ export const getPetByOwner = async (email)=>{
     };
   
   const response = await axios.get(`${APIURLPET}${email}`, config);
-  console.log(response.data)
   return response.data;
 }

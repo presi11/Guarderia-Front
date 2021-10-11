@@ -28,7 +28,6 @@ const AsigClasroom = () => {
   }
 
   function showModalClassRooms(id) {
-    console.log(id)
     setRoom(id);
     setOpenClassRoomModal(!openClassRoomModal);
     //getAllPets();
@@ -78,7 +77,7 @@ const AsigClasroom = () => {
         </Box>
       </Box>
      <AgendaModal open = {openAgendaModal} setOpen = {setOpenAgendaModal} data ={getLoungData}/>
-     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + room} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
+     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + room} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal}/>
     </Container>
   );
 };

@@ -8,7 +8,6 @@ import CompleteFormPet from "../../Component/Modalforms/CompleteFormPet";
 const defaultValues = {
   petName: "",
   raceId: 1,
-  ownerId: 10,
   size: 1,
   age: "",
   vaccinationPlan: "",
@@ -16,9 +15,9 @@ const defaultValues = {
 };
 
 const raceIdPet = () => [
-  { id: "4", title: "Mestiza" },
-  { id: "1", title: "Chiwuawa" },
-  { id: "2", title: "Pastor Velga" },
+  { id: "1", title: "Mestiza" },
+  { id: "2", title: "Chiwuawa" },
+  { id: "3", title: "Pastor Velga" },
 ];
 
 const sizeIdPet = () => [
@@ -50,7 +49,6 @@ const Register = (props) => {
     const petRegister = {
       petName: values.petName,
       raceId: values.raceId,
-      ownerId: 10,
       size: values.size,
       age: values.age,
       vaccinationPlan: values.vaccinationPlan,

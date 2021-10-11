@@ -25,6 +25,7 @@ const SideBar = ({ isOpen, setIsOpen }) => {
     window.location.reload(false);
   };
 
+  const authoritie = window.localStorage.getItem("authorities");
   return (
     <SideBarContainer isopen={isOpen ? 1 : 0}>
       <Icon>
@@ -37,18 +38,26 @@ const SideBar = ({ isOpen, setIsOpen }) => {
           </SideBarLink>
           {localStorage.getItem("access_token") ? (
             <Fragment>
+              {(authoritie.includes("create pet")) && (
               <SideBarLink to="Register" onClick={() => closeSideBarHandle()}>
                 Registrar
               </SideBarLink>
+               )}
+               {authoritie === "update_pet,delete_pet,list_pets_by_user,create_pet"  && (
               <SideBarLink to="MePets" onClick={() => closeSideBarHandle()}>
                 Mis Mascotas
               </SideBarLink>
+              )}
+                {authoritie.includes("accept_pet")   && (
               <SideBarLink to="ApprovePet" onClick={() => closeSideBarHandle()}>
                 Aprobar
               </SideBarLink>
+              )}
+               {authoritie.includes("schedule_pet")  && (
               <SideBarLink to="Classroom" onClick={() => closeSideBarHandle()}>
                 Agenda
               </SideBarLink>
+              )}
             </Fragment>
           ) : null}
         </SideBarMenu>

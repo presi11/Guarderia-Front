@@ -20,6 +20,8 @@ const NavbarHOC = ({ children }) => {
     setIsOpen(!isOpen);
   };
 
+    const authoritie = window.localStorage.getItem("authorities")
+
   const logOut = () => {
     localStorage.clear();
     history.push("/Home");
@@ -38,10 +40,18 @@ const NavbarHOC = ({ children }) => {
           <NavLink to="/home">Inicio</NavLink>
           {localStorage.getItem("access_token") ? (
             <Fragment>
+              {(authoritie.includes("create pet")) && (
               <NavLink to="/Register">Registrar</NavLink>
+              )}
+              {authoritie === "update_pet,delete_pet,list_pets_by_user,create_pet"  && (
               <NavLink to="/MePets">Mis Mascotas</NavLink>
+              )}
+               {authoritie.includes("accept_pet")   && (
               <NavLink to="/ApprovePet">Aprobar</NavLink>
-              <NavLink to="/Classroom">Agenda</NavLink>
+              )}
+              {authoritie.includes("schedule_pet")  && (
+              <NavLink to="/Classroom">Aula</NavLink>
+              )}
             </Fragment>
           ) : null}
         </NavMenu>

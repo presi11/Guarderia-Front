@@ -1,32 +1,54 @@
 import React, { useState, useEffect, Fragment } from "react";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { pets } from "../../../services/asignPetClassService";
+import { getLoung } from "../../../services/scheduleService";
+import LoungCard from "../../../Component/LoungCard/LoungCard";
+import AgendaModal from '../../../Component/Modalforms/AgendaModal'
+import ClassRoomModal from '../../../Component/Modalforms/ClassRoomModal'
+
 
 const AsigClasroom = () => {
-  const [petOwner, setPetOwner] = useState([]);
 
-  useEffect(() => {
-    setPetOwner(pets);
-  }, []);
+  const [getLoungData, setGetLoungData] = useState([]);
+  const [openAgendaModal, setOpenAgendaModal] = useState(false);
+  const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
+  const [room, setRoom] = useState(0)
+ useEffect(() => {
+    getLoung().then((data)=>{
+      setGetLoungData(data)
+    });
+    
+  }, [setGetLoungData]);
 
-  const handleSubmit = (event) => {
+  function showModalAgenda() {
+    setOpenAgendaModal(!openAgendaModal);
+  }
+
+  function showModalClassRooms(id) {
+    console.log(id)
+    setRoom(id);
+    setOpenClassRoomModal(!openClassRoomModal);
+    //getAllPets();
+  }
+
+  /* const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    getLoung().then(data=>{
+      console.log(data)
+    });
+    //const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
-  };
+  }; */
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" >
       <CssBaseline />
       <Box
         sx={{
@@ -39,35 +61,15 @@ const AsigClasroom = () => {
         <Typography component="h1" variant="h5">
           Asignación de aula
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box sx={{ mt: 1 }}>
           <Grid container spacing={2}>
-            <Grid item xs={10}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Correo del dueño"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                size="small"
-              />
-            </Grid>
-            <Grid item xs={2}>
-              <Button type="submit" variant="outlined" sx={{ mt: 2, mb: 2 }}>
-                Buscar
-              </Button>
-            </Grid>
+            <Grid item container xs={12} spacing={2}>
+              {/* <Button onClick={handleSubmit}>Get data</Button> */}
+              {getLoungData.map((loung, index) => (
+                <Fragment key={loung.id}>
+                  <Grid item sm={6} xs={12} md={4}>
+                  <LoungCard data={loung} showModal={showModalAgenda} showModalClassRooms={showModalClassRooms}/>
 
-            <Grid item container xs={12}>
-              {petOwner.map((myPet) => (
-                <Fragment key={myPet.id}>
-                  <Grid item xs={6}>
-                    {myPet.petName}
-                  </Grid>
-                  <Grid item xs={6}>
-                    {myPet.aula.id}
                   </Grid>
                 </Fragment>
               ))}
@@ -75,6 +77,8 @@ const AsigClasroom = () => {
           </Grid>
         </Box>
       </Box>
+     <AgendaModal open = {openAgendaModal} setOpen = {setOpenAgendaModal} data ={getLoungData}/>
+     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + room} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
     </Container>
   );
 };

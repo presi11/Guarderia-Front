@@ -8,18 +8,19 @@ import {
   Container,
   TextField,
   Button,
-  CssBaseline,
+  Box
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Control from "../Control/Control";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box } from "@mui/system";
+import {useForm, Controller} from 'react-hook-form'
+import {getPetByOwner} from '../../services/scheduleService'
 
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
     padding: theme.spacing,
     position: "absolute",
-    width: "600px",
+    width: "800px",
     "& .MuiFormControl-root": {
       width: "80%",
       margin: theme.spacing,
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const AgendaModal = (props) => {
   const { title, open, setOpen } = props;
   const styles = useStyles();
+  const {control, handleSubmit} = useForm()
   /* const [petOwner, setPetOwner] = useState([]); */
 
   /*   useEffect(() => {
@@ -47,14 +49,16 @@ const AgendaModal = (props) => {
     setOpen(false);
   }
  */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  const onSubmit = (data) => {
+    let findUserAndPet = data.find;
+    getPetByOwner(findUserAndPet).then((resp)=>{
+      console.log(resp)
+    })
+    console.log(findUserAndPet.trim())
+
+    //const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    
   };
 
   return (
@@ -79,9 +83,9 @@ const AgendaModal = (props) => {
           </Control.ActionButton>
         </div>
       </DialogTitle>
-      <DialogContent dividers>
+      <DialogContent dividers sx={{pt:2}}>
         <Container component="main">
-          <CssBaseline />
+          
           <Box
             sx={{
               marginTop: 3,
@@ -94,22 +98,29 @@ const AgendaModal = (props) => {
               Asignación de aula
             </Typography>
             <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
               sx={{ mt: 1 }}
             >
+              <form onSubmit={handleSubmit(onSubmit)}>
+
               <Grid container>
                 <Grid item xs={10}>
-                  <TextField
-                    margin="normal"
-                    required
-                    id="email"
-                    label="Correo del dueño"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    size="small"
+                  <Controller
+                    name="find"
+                    control={control}
+                    render={({field})=>(
+                      <TextField
+                        margin="normal"
+                        required
+                        id="find"
+                        label="Correo del dueño"
+                        name="find"
+                        autoComplete="find"
+                        autoFocus
+                        size="small"
+                        fullWidth
+                        {...field}
+                        />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={2}>
@@ -120,21 +131,24 @@ const AgendaModal = (props) => {
                   >
                     Buscar
                   </Button>
+
                 </Grid>
+               
 
                 {/* <Grid item container xs={12}>
               {petOwner.map((myPet) => (
-                  <Fragment key={myPet.id}>
+                <Fragment key={myPet.id}>
                 <Grid item xs={6}>
                 {myPet.petName}
-                  </Grid>
-                  <Grid item xs={6}>
-                  {myPet.aula.id}
-                  </Grid>
-                  </Fragment>
-                  ))} */}
+                </Grid>
+                <Grid item xs={6}>
+                {myPet.aula.id}
+                </Grid>
+                </Fragment>
+              ))} */}
                 {/* </Grid> */}
               </Grid>
+              </form>
             </Box>
           </Box>
         </Container>

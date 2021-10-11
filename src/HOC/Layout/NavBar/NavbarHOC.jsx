@@ -50,8 +50,8 @@ const NavbarHOC = ({ children }) => {
               <NavLink to="/ApprovePet">Aprobar</NavLink>
               )}
               {authoritie.includes("schedule_pet")  && (
-              <NavLink to="/Classroom">Aula</NavLink>
-              )}
+                <NavLink to="/Classroom">Aula</NavLink>
+                )} 
             </Fragment>
           ) : null}
         </NavMenu>

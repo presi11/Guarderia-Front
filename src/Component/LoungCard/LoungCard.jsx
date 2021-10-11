@@ -28,6 +28,12 @@ const LoungCard = (props) => {
         <Typography variant="body2">
           {data.currentQuantity}
         </Typography>
+        <Typography color="text.secondary">
+          Disponibilidad
+        </Typography>
+        <Typography variant="body2">
+          {data.availability}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={showModal}>Asignar una mascota</Button>

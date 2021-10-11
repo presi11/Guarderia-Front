@@ -18,7 +18,7 @@ const ApproveModal = ({ open, setOpen, data }) => {
   function handleCloseDelete () {
     changeStatusPet(data.id);
     setOpen(false);
-    window.location.reload(false);
+    //window.location.reload(false);
   };
 
   return (

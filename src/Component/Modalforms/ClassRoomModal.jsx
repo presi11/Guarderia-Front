@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const ClassRoomModal = (props) => {
 
   const [roomInformation, setRoomInformation] = useState([]);
-  const {idRoom, title, open, setOpen } = props;
+  const { title, open, setOpen } = props;
   const styles = useStyles();
 
   useEffect(() => {

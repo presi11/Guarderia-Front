@@ -14,6 +14,7 @@ import Control from "../Control/Control";
 import CloseIcon from "@mui/icons-material/Close";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { getPetByOwner } from "../../services/scheduleService";
+import { postAgendaSchedule, getPruebas} from '../../services/scheduleService'
 
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
@@ -43,12 +44,13 @@ const AgendaModal = (props) => {
     let findUserAndPet = data.find;
     getPetByOwner(findUserAndPet).then((resp) => {
       console.log(resp);
+      getPruebas(idRoom).then((res)=>{
+        console.log(res.data)
+      })
       if (resp.status === 200) {
         setPets(resp.data);
-        console.log(pets);
       }
     });
-    console.log(findUserAndPet.trim());
   };
 
   const onSubmitSaveAgenda = (data) => {
@@ -67,7 +69,15 @@ const AgendaModal = (props) => {
         });
       }
     });
-    console.log(agendaPet);
+    postAgendaSchedule(agendaPet[0]).then((resp)=>{
+      console.log(resp)
+      if(resp.status!==200){
+        console.log("error")
+      }else{
+        setOpen(false)
+      }
+      
+    })
 
   };
 
@@ -106,7 +116,7 @@ const AgendaModal = (props) => {
             Asignación de aula
           </Typography>
           <Box sx={{ mt: 1 }}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{width:"100%"}}>
               <Grid container>
                 <Grid item xs={10} sx={{ pr: 3 }}>
                   <Controller
@@ -139,7 +149,7 @@ const AgendaModal = (props) => {
               </Grid>
             </form>
           </Box>
-          <form onSubmit={handleSubmit(onSubmitSaveAgenda)}>
+          <form onSubmit={handleSubmit(onSubmitSaveAgenda)} style={{width:"100%"}}>
             <Grid container direction="row" spacing={3}>
               <Grid container item xs={12}>
                 <Grid item xs={6}>
@@ -214,6 +224,7 @@ const AgendaModal = (props) => {
             </Grid>
           </form>
         </Box>
+        
       </DialogContent>
     </Dialog>
   );

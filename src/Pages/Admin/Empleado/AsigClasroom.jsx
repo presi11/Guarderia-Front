@@ -17,13 +17,12 @@ const AsigClasroom = () => {
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
   const [room, setRoom] = useState(0)
   const [roomAgenda, setRoomAgenda] = useState(0);
-  const [loadContent, setLoadContent] = useState(false)
  useEffect(() => {
     getLoung().then((data)=>{
       setGetLoungData(data)
     });
     
-  }, [setGetLoungData, loadContent]);
+  }, [setGetLoungData]);
 
   function showModalAgenda(id) {
     console.log(id)

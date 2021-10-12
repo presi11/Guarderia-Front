@@ -29,7 +29,7 @@ export const getAllPets = async () => {
 
   
   const response = await axios.get(`${APIURL}`, config);
-  console.log(response.data);
+  
   return response;
 };
 

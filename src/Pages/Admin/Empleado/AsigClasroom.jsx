@@ -17,7 +17,6 @@ const AsigClasroom = () => {
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
   const [room, setRoom] = useState(0)
   const [roomAgenda, setRoomAgenda] = useState(0);
-  
  useEffect(() => {
     getLoung().then((data)=>{
       setGetLoungData(data)

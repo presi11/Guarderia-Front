@@ -34,7 +34,7 @@ const AgendaModal = (props) => {
   const { control, handleSubmit, register } = useForm({
     defaultValues: { find: "" },
   });
-const [text, setText] = useState("")
+
   useFieldArray({
     control,
     name: "schedule",
@@ -43,10 +43,10 @@ const [text, setText] = useState("")
   const onSubmit = (data) => {
     let findUserAndPet = data.find;
     getPetByOwner(findUserAndPet).then((resp) => {
-      /* console.log(resp);
+      console.log(resp);
       getPruebas(idRoom).then((res)=>{
         console.log(res.data)
-      }) */
+      })
       if (resp.status === 200) {
         setPets(resp.data);
       }
@@ -72,7 +72,7 @@ const [text, setText] = useState("")
     postAgendaSchedule(agendaPet[0]).then((resp)=>{
       console.log(resp)
       if(resp.status!==200){
-        setText("La mascota ya se encuentra registrada en un aula")
+        console.log("error")
       }else{
         setOpen(false)
       }
@@ -116,7 +116,7 @@ const [text, setText] = useState("")
             Asignación de aula
           </Typography>
           <Box sx={{ mt: 1 }}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{width:"100%"}}>
               <Grid container>
                 <Grid item xs={10} sx={{ pr: 3 }}>
                   <Controller
@@ -149,7 +149,7 @@ const [text, setText] = useState("")
               </Grid>
             </form>
           </Box>
-          <form onSubmit={handleSubmit(onSubmitSaveAgenda)}>
+          <form onSubmit={handleSubmit(onSubmitSaveAgenda)} style={{width:"100%"}}>
             <Grid container direction="row" spacing={3}>
               <Grid container item xs={12}>
                 <Grid item xs={6}>

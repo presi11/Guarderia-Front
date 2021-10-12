@@ -14,6 +14,7 @@ import Control from "../Control/Control";
 import CloseIcon from "@mui/icons-material/Close";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { getPetByOwner } from "../../services/scheduleService";
+import { postAgendaSchedule, getPruebas} from '../../services/scheduleService'
 
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
@@ -33,7 +34,7 @@ const AgendaModal = (props) => {
   const { control, handleSubmit, register } = useForm({
     defaultValues: { find: "" },
   });
-
+const [text, setText] = useState("")
   useFieldArray({
     control,
     name: "schedule",
@@ -42,13 +43,14 @@ const AgendaModal = (props) => {
   const onSubmit = (data) => {
     let findUserAndPet = data.find;
     getPetByOwner(findUserAndPet).then((resp) => {
-      console.log(resp);
+      /* console.log(resp);
+      getPruebas(idRoom).then((res)=>{
+        console.log(res.data)
+      }) */
       if (resp.status === 200) {
         setPets(resp.data);
-        console.log(pets);
       }
     });
-    console.log(findUserAndPet.trim());
   };
 
   const onSubmitSaveAgenda = (data) => {
@@ -67,7 +69,15 @@ const AgendaModal = (props) => {
         });
       }
     });
-    console.log(agendaPet);
+    postAgendaSchedule(agendaPet[0]).then((resp)=>{
+      console.log(resp)
+      if(resp.status!==200){
+        setText("La mascota ya se encuentra registrada en un aula")
+      }else{
+        setOpen(false)
+      }
+      
+    })
 
   };
 
@@ -214,6 +224,7 @@ const AgendaModal = (props) => {
             </Grid>
           </form>
         </Box>
+        
       </DialogContent>
     </Dialog>
   );

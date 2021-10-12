@@ -64,7 +64,7 @@ const ClassRoomModal = (props) => {
       <DialogContent dividers>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 300 }} aria-label="caption table">
-            <caption></caption>
+            <caption>Mascotas actuales en el salon</caption>
             <TableHead>
               <TableRow>
                 <TableCell>Identificacion</TableCell>

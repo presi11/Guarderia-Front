@@ -36,7 +36,7 @@ const LoungCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={showModal}>Asignar una mascota</Button>
+        <Button size="small" onClick={()=>showModal(data.id)}>Asignar una mascota</Button>
         <Button size="small" onClick={()=> showModalClassRooms(data.id)}>Ver Mascotas</Button>
       </CardActions>
     </Card>

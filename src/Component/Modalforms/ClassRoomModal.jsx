@@ -34,10 +34,16 @@ const ClassRoomModal = (props) => {
   const styles = useStyles();
 
   useEffect(() => {
-    getLoungeSchedules().then((roomInformation)=>{
+    getLoungeSchedules(idRoom).then((roomInformation)=>{
       setRoomInformation(roomInformation)
     })
-  }, [setRoomInformation]) 
+  }, [idRoom]) 
+
+  /*
+  getPruebas(idRoom).then((res)=>{
+    console.log(res.data)
+  })
+  */
 
   return (
     <Dialog

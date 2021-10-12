@@ -18,17 +18,14 @@ export const getLoung = async ()=>{
     return response.data;
 }
 
-export const getLoungeSchedules= async ()=>{
+export const getLoungeSchedules= async (id)=>{
   const tokenId = window.localStorage.getItem("access_token");
   const config = {
       headers: {
         Authorization: `Bearer ${tokenId}`,
       },
     };
-  
-  const response = await axios.get(`${APIURL}schedule/1`, config);
-  console.log('Aulas')
-  console.log( response.data)
+  const response = await axios.get(`${APIURL}schedule/${id}`, config);
   return response.data;
 }
 

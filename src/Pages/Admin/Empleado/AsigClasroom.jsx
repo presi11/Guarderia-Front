@@ -78,7 +78,7 @@ const AsigClasroom = () => {
         </Box>
       </Box>
      <AgendaModal open = {openAgendaModal} setOpen = {setOpenAgendaModal} data ={getLoungData}/>
-     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + roomId} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data={roomId}/>
+     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + roomId} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} idRoom={roomId}/>
     </Container>
   );
 };

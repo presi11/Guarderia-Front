@@ -15,8 +15,9 @@ const AsigClasroom = () => {
   const [getLoungData, setGetLoungData] = useState([]);
   const [openAgendaModal, setOpenAgendaModal] = useState(false);
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
-  const [room, setRoom] = useState(0)
+  const [roomId, setRoomId] = useState(0)
   const [roomAgenda, setRoomAgenda] = useState(0);
+
  useEffect(() => {
     getLoung().then((data)=>{
       setGetLoungData(data)
@@ -25,16 +26,13 @@ const AsigClasroom = () => {
   }, [setGetLoungData]);
 
   function showModalAgenda(id) {
-    console.log(id)
     setRoomAgenda(id);
     setOpenAgendaModal(!openAgendaModal);
   }
 
   function showModalClassRooms(id) {
-    console.log(id)
-    setRoom(id);
+    setRoomId(id);
     setOpenClassRoomModal(!openClassRoomModal);
-    //getAllPets();
   }
 
   /* const handleSubmit = (event) => {
@@ -80,8 +78,8 @@ const AsigClasroom = () => {
           </Grid>
         </Box>
       </Box>
-     <AgendaModal title ={room} open = {openAgendaModal} setOpen = {setOpenAgendaModal} idRoom={roomAgenda}/>
-     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + room} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
+     <AgendaModal title ={roomId} open = {openAgendaModal} setOpen = {setOpenAgendaModal} idRoom={roomAgenda}/>
+     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + roomId} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} idRoom ={roomId}/>
     </Container>
   );
 };

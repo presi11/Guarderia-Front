@@ -35,7 +35,6 @@ const ClassRoomModal = (props) => {
 
   useEffect(() => {
     getLoungeSchedules().then((roomInformation)=>{
-      console.log(idRoom)
       setRoomInformation(roomInformation)
     })
   }, [setRoomInformation]) 

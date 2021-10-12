@@ -38,6 +38,5 @@ export const getPetByOwner = async (email)=>{
     };
   
   const response = await axios.get(`${APIURLPET}${email}`, config);
-  console.log(response.data)
-  return response.data;
+  return response;
 }

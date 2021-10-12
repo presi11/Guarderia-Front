@@ -11,6 +11,8 @@ import Home from "./Pages/Home/Home";
 import MePets from "./Pages/Pets/MePets";
 import ApprovePet from "./Pages/Approve/ApprovePet";
 import AsigClasroom from './Pages/Admin/Empleado/AsigClasroom'
+import qr from './Assets/qrWeb.png'
+import Fab from "@mui/material/Fab";
 import "./App.css";
 
 const App = () => {
@@ -37,8 +39,26 @@ const App = () => {
           <Route path="/Classroom" component={AsigClasroom} />
           <Route path="*" render={() => <p>NO TENGO NADA</p>} />
         </Switch>
+        
       }
+      <Fab
+          aria-label="add"
+          sx={{
+            backgroundColor: "#00c000",
+            position: "fixed",
+            top: "80%",
+            right: "5%",
+            webkitBoxShadow: "11px 14px 34px 2px rgba(153,153,153,0.71)",
+            boxShadow: "11px 14px 34px 2px rgba(153,153,153,0.71)",
+          }}
+          onClick={() => {
+            console.log("click");
+          }}
+        >
+          <img src={qr} style={{width:"200px", height:"200px"}}></img>
+        </Fab>
     </NavbarHOC>
+    
   );
 };
 

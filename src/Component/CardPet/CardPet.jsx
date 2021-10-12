@@ -82,11 +82,9 @@ const CardPet = ({ dataPet }) => {
             <Coords>
               <span>Cuidados: {dataPet.careToHave}</span>
             </Coords>
-            <ContainerList>
-              <li>Guarderia</li>
-              <li>Dia de sol</li>
-              <li>Colegio</li>
-            </ContainerList>
+            <Coords>
+              <span>Estado: {dataPet.status}</span>
+            </Coords>
           </MoreInfoPet>
         </Aditional>
         <PetDescription>

@@ -27,8 +27,11 @@ const DeleteModal = ({ open, setOpen, data, setMyPets, myPets, pet }) => {
   
     //setMyPets(myPets)
 
-    deletePet(data.id)
-      
+    deletePet(data.id).then((resp)=>{
+      if(resp.status ===200){
+        window.alert('Se borro la mascota')
+      }
+    })
     setOpen(false);
     //window.location.reload(false);
   };

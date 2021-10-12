@@ -16,6 +16,7 @@ import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { getPetByOwner } from "../../services/scheduleService";
 import { postAgendaSchedule, getPruebas} from '../../services/scheduleService'
 
+
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
     padding: theme.spacing,
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AgendaModal = (props) => {
+
   const { idRoom, open, setOpen } = props;
   const styles = useStyles();
   const [pets, setPets] = useState([]);
@@ -43,14 +45,15 @@ const AgendaModal = (props) => {
   const onSubmit = (data) => {
     let findUserAndPet = data.find;
     getPetByOwner(findUserAndPet).then((resp) => {
-      console.log(resp);
       getPruebas(idRoom).then((res)=>{
         console.log(res.data)
       })
       if (resp.status === 200) {
         setPets(resp.data);
       }
+
     });
+    
   };
 
   const onSubmitSaveAgenda = (data) => {
@@ -70,16 +73,21 @@ const AgendaModal = (props) => {
       }
     });
     postAgendaSchedule(agendaPet[0]).then((resp)=>{
-      console.log(resp)
-      if(resp.status!==200){
-        console.log("error")
-      }else{
-        setOpen(false)
+
+      if(resp.status===200){
+        window.alert('Se agendo la mascota');
+        setOpen(false);
+        window.location.reload(false);
+      } 
+      if(resp.status===400){
+        window.alert('No se agendo');
       }
       
     })
 
   };
+  
+
 
   return (
     <Dialog
@@ -224,7 +232,7 @@ const AgendaModal = (props) => {
             </Grid>
           </form>
         </Box>
-        
+ 
       </DialogContent>
     </Dialog>
   );

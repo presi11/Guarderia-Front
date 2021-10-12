@@ -16,6 +16,8 @@ import Fab from "@mui/material/Fab";
 import "./App.css";
 
 const App = () => {
+
+  
   return (
     <NavbarHOC>
       {
@@ -35,6 +37,7 @@ const App = () => {
           <Route path="/Home" component={Home} />
           <Route path="/MePets" component={MePets} />
           <Route path="/Register" component={Register} />
+
           <Route path="/ApprovePet" component={ApprovePet} />
           <Route path="/Classroom" component={AsigClasroom} />
           <Route path="*" render={() => <p>NO TENGO NADA</p>} />
@@ -51,11 +54,9 @@ const App = () => {
             webkitBoxShadow: "11px 14px 34px 2px rgba(153,153,153,0.71)",
             boxShadow: "11px 14px 34px 2px rgba(153,153,153,0.71)",
           }}
-          onClick={() => {
-            console.log("click");
-          }}
+
         >
-          <img src={qr} style={{width:"200px", height:"200px"}}></img>
+          <img src={qr} style={{width:"200px", height:"200px"}} alt= 'Qr para la aplicacion'></img>
         </Fab>
     </NavbarHOC>
     

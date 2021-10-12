@@ -93,7 +93,6 @@ export const getPets = async () => {
         Authorization: `Bearer ${tokenId}`,
       },
     };
-    console.log(idpet)
     const response = await axios.get(`${APIURL}/accept/${idpet}`,  config);
     return response;
   };

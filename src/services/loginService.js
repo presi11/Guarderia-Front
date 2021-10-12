@@ -24,7 +24,6 @@ export const loginAxios = async (data) => {
         password: 'quevivanloshorro'
     }
   });
-  console.log(response)
   window.localStorage.setItem("access_token", response.data.access_token);
   return response;
 };

@@ -16,14 +16,18 @@ const AsigClasroom = () => {
   const [openAgendaModal, setOpenAgendaModal] = useState(false);
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
   const [room, setRoom] = useState(0)
+  const [roomAgenda, setRoomAgenda] = useState(0);
+  const [loadContent, setLoadContent] = useState(false)
  useEffect(() => {
     getLoung().then((data)=>{
       setGetLoungData(data)
     });
     
-  }, [setGetLoungData]);
+  }, [setGetLoungData, loadContent]);
 
-  function showModalAgenda() {
+  function showModalAgenda(id) {
+    console.log(id)
+    setRoomAgenda(id);
     setOpenAgendaModal(!openAgendaModal);
   }
 
@@ -68,7 +72,7 @@ const AsigClasroom = () => {
               {getLoungData.map((loung, index) => (
                 <Fragment key={loung.id}>
                   <Grid item sm={6} xs={12} md={4}>
-                  <LoungCard data={loung} showModal={showModalAgenda} showModalClassRooms={showModalClassRooms}/>
+                  <LoungCard data={loung} showModal={showModalAgenda} showModalClassRooms={showModalClassRooms} />
 
                   </Grid>
                 </Fragment>
@@ -77,7 +81,7 @@ const AsigClasroom = () => {
           </Grid>
         </Box>
       </Box>
-     <AgendaModal open = {openAgendaModal} setOpen = {setOpenAgendaModal} data ={getLoungData}/>
+     <AgendaModal title ={room} open = {openAgendaModal} setOpen = {setOpenAgendaModal} idRoom={roomAgenda}/>
      <ClassRoomModal title={'Macotas Asignadas al Salon: ' + room} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} data ={getLoungData}/>
     </Container>
   );

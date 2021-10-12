@@ -1,29 +1,25 @@
-import React /* {useState, useEffect} */ from "react";
+import React, { useState, Fragment /*, useEffect} */ } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   Typography,
   Grid,
-  Container,
   TextField,
   Button,
-  CssBaseline,
+  Box,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Control from "../Control/Control";
 import CloseIcon from "@mui/icons-material/Close";
-import { Box } from "@mui/system";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
+import { getPetByOwner } from "../../services/scheduleService";
 
 const useStyles = makeStyles((theme) => ({
   dialogWraper: {
     padding: theme.spacing,
     position: "absolute",
-    width: "600px",
-    "& .MuiFormControl-root": {
-      width: "80%",
-      margin: theme.spacing,
-    },
+    width: "800px",
   },
   dialogTitle: {
     paddingRigth: "0px",
@@ -31,30 +27,48 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AgendaModal = (props) => {
-  const { title, open, setOpen } = props;
+  const { idRoom, open, setOpen } = props;
   const styles = useStyles();
-  /* const [petOwner, setPetOwner] = useState([]); */
+  const [pets, setPets] = useState([]);
+  const { control, handleSubmit, register } = useForm({
+    defaultValues: { find: "" },
+  });
 
-  /*   useEffect(() => {
-    setPetOwner(pets);
-  }, []); */
+  useFieldArray({
+    control,
+    name: "schedule",
+  });
 
-  /*  const handleClose = () => {
-    setOpen(false);
-  };
-  function handleCloseAgenda() {
-    //deletePet(data.id);
-    setOpen(false);
-  }
- */
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  const onSubmit = (data) => {
+    let findUserAndPet = data.find;
+    getPetByOwner(findUserAndPet).then((resp) => {
+      console.log(resp);
+      if (resp.status === 200) {
+        setPets(resp.data);
+        console.log(pets);
+      }
     });
+    console.log(findUserAndPet.trim());
+  };
+
+  const onSubmitSaveAgenda = (data) => {
+
+    let agendaPet = [];
+    // eslint-disable-next-line array-callback-return
+    data.schedule.map((item, index) => {
+      if (item.options.indexOf(true) >= 0) {
+        
+        agendaPet.push({
+          petId: pets[index].id,
+          loungeId: idRoom,
+          sunDay: item.options[0],
+          school: item.options[1],
+          kindergarten: item.options[2],
+        });
+      }
+    });
+    console.log(agendaPet);
+
   };
 
   return (
@@ -66,7 +80,7 @@ const AgendaModal = (props) => {
       <DialogTitle className={styles.dialogTitle}>
         <div style={{ display: "flex" }}>
           <Typography variant="h6" component="div" style={{ flexGrow: 1 }}>
-            {title}
+            Asignacion de agenda
           </Typography>
 
           <Control.ActionButton
@@ -79,37 +93,38 @@ const AgendaModal = (props) => {
           </Control.ActionButton>
         </div>
       </DialogTitle>
-      <DialogContent dividers>
-        <Container component="main">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 3,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Typography component="h1" variant="h5">
-              Asignación de aula
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
+      <DialogContent dividers sx={{ pt: 2 }}>
+        <Box
+          sx={{
+            marginTop: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Asignación de aula
+          </Typography>
+          <Box sx={{ mt: 1 }}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container>
-                <Grid item xs={10}>
-                  <TextField
-                    margin="normal"
-                    required
-                    id="email"
-                    label="Correo del dueño"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    size="small"
+                <Grid item xs={10} sx={{ pr: 3 }}>
+                  <Controller
+                    name="find"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        margin="normal"
+                        required
+                        id="find"
+                        label="Correo del dueño"
+                        name="find"
+                        autoFocus
+                        size="small"
+                        fullWidth
+                        {...field}
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={2}>
@@ -121,23 +136,84 @@ const AgendaModal = (props) => {
                     Buscar
                   </Button>
                 </Grid>
-
-                {/* <Grid item container xs={12}>
-              {petOwner.map((myPet) => (
-                  <Fragment key={myPet.id}>
+              </Grid>
+            </form>
+          </Box>
+          <form onSubmit={handleSubmit(onSubmitSaveAgenda)}>
+            <Grid container direction="row" spacing={3}>
+              <Grid container item xs={12}>
                 <Grid item xs={6}>
-                {myPet.petName}
+                  <Typography>Mascotas</Typography>
+                </Grid>
+                <Grid container item xs={6}>
+                  <Grid item xs={4}>
+                    <Typography>Dia de sol</Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Typography>Escuela</Typography>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Typography>Guarderia</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              {pets.map((myPet, index) => (
+                <Fragment key={myPet.id}>
+                  <Grid item xs={6}>
+                    {myPet.petName}
                   </Grid>
                   <Grid item xs={6}>
-                  {myPet.aula.id}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div>
+                        <label className="control control-checkbox">
+                          <input
+                            type="checkbox"
+                            {...register(`schedule.${index}.options[0]`)}
+                          />
+                          <div className="control_indicator"></div>
+                        </label>
+                      </div>
+                      <div>
+                        <label className="control control-checkbox">
+                          <input
+                            type="checkbox"
+                            {...register(`schedule.${index}.options[1]`)}
+                          />
+                          <div className="control_indicator"></div>
+                        </label>
+                      </div>
+                      <div>
+                        <label className="control control-checkbox">
+                          <input
+                            type="checkbox"
+                            {...register(`schedule.${index}.options[2]`)}
+                          />
+                          <div className="control_indicator"></div>
+                        </label>
+                      </div>
+                    </div>
                   </Grid>
-                  </Fragment>
-                  ))} */}
-                {/* </Grid> */}
+                </Fragment>
+              ))}
+              <Grid item xs={6}>
+                {pets.length > 0 ? (
+                  <Button
+                    type="submit"
+                    variant="outlined"
+                    sx={{ mt: 2, mb: 2, left: "0" }}
+                  >
+                    Guardar
+                  </Button>
+                ) : null}
               </Grid>
-            </Box>
-          </Box>
-        </Container>
+            </Grid>
+          </form>
+        </Box>
       </DialogContent>
     </Dialog>
   );

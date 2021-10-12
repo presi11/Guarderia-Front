@@ -17,7 +17,7 @@ const AsigClasroom = () => {
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
   const [roomId, setRoomId] = useState(0)
   const [roomAgenda, setRoomAgenda] = useState(0);
-  
+
  useEffect(() => {
     getLoung().then((data)=>{
       setGetLoungData(data)
@@ -25,14 +25,14 @@ const AsigClasroom = () => {
     
   }, [setGetLoungData]);
 
-  function showModalAgenda() {
+  function showModalAgenda(id) {
+    setRoomAgenda(id);
     setOpenAgendaModal(!openAgendaModal);
   }
 
   function showModalClassRooms(id) {
     setRoomId(id);
     setOpenClassRoomModal(!openClassRoomModal);
-    //getAllPets();
   }
 
   /* const handleSubmit = (event) => {
@@ -69,7 +69,7 @@ const AsigClasroom = () => {
               {getLoungData.map((loung, index) => (
                 <Fragment key={loung.id}>
                   <Grid item sm={6} xs={12} md={4}>
-                  <LoungCard data={loung} showModal={showModalAgenda} showModalClassRooms={showModalClassRooms}/>
+                  <LoungCard data={loung} showModal={showModalAgenda} showModalClassRooms={showModalClassRooms} />
 
                   </Grid>
                 </Fragment>
@@ -78,8 +78,8 @@ const AsigClasroom = () => {
           </Grid>
         </Box>
       </Box>
-      <AgendaModal title ={roomId} open = {openAgendaModal} setOpen = {setOpenAgendaModal} idRoom={roomAgenda}/>
-     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + roomId} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} idRoom={roomId}/>
+     <AgendaModal title ={roomId} open = {openAgendaModal} setOpen = {setOpenAgendaModal} idRoom={roomAgenda}/>
+     <ClassRoomModal title={'Macotas Asignadas al Salon: ' + roomId} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} idRoom ={roomId}/>
     </Container>
   );
 };

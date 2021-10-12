@@ -30,16 +30,15 @@ const useStyles = makeStyles((theme) => ({
 const ClassRoomModal = (props) => {
 
   const [roomInformation, setRoomInformation] = useState([]);
-  const [roomId, setRoomId] = useState(0)
-  
+  const {idRoom, title, open, setOpen } = props;
+  const styles = useStyles();
+
   useEffect(() => {
     getLoungeSchedules().then((roomInformation)=>{
+      console.log(idRoom)
       setRoomInformation(roomInformation)
     })
   }, [setRoomInformation]) 
-
-  const { title, open, setOpen } = props;
-  const styles = useStyles();
 
   return (
     <Dialog

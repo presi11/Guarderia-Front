@@ -10,6 +10,7 @@ const MePets = () => {
     getPets().then((pets)=>{
       setStatusCode(pets.status);
       setpets(pets.data)
+      console.log(pets);
     })
   }, [setpets]) 
 

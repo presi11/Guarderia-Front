@@ -9,7 +9,6 @@ import {
   Help,
   MoreInfoPet,
   Coords,
-  ContainerList,
 } from "./CardPet.elements";
 import Perro from "../../Assets/perro.jpg";
 import Button from "@mui/material/Button";

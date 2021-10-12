@@ -12,6 +12,7 @@ import ClassRoomModal from '../../../Component/Modalforms/ClassRoomModal'
 
 const AsigClasroom = () => {
 
+
   const [getLoungData, setGetLoungData] = useState([]);
   const [openAgendaModal, setOpenAgendaModal] = useState(false);
   const [openClassRoomModal, setOpenClassRoomModal] = useState(false)
@@ -80,6 +81,8 @@ const AsigClasroom = () => {
       </Box>
      <AgendaModal title ={roomId} open = {openAgendaModal} setOpen = {setOpenAgendaModal} idRoom={roomAgenda}/>
      <ClassRoomModal title={'Macotas Asignadas al Salon: ' + roomId} open = {openClassRoomModal} setOpen = {setOpenClassRoomModal} idRoom ={roomId}/>
+
+    
     </Container>
   );
 };

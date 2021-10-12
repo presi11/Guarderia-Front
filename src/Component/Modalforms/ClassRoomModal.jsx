@@ -28,12 +28,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ClassRoomModal = (props) => {
-  const [room, setRoom] = useState([]);
+
+  const [roomInformation, setRoomInformation] = useState([]);
+  const [roomId, setRoomId] = useState(0)
+  
   useEffect(() => {
-    getLoungeSchedules().then((room)=>{
-      setRoom(room)
+    getLoungeSchedules().then((roomInformation)=>{
+      setRoomInformation(roomInformation)
     })
-  }, [setRoom]) 
+  }, [setRoomInformation]) 
 
   const { title, open, setOpen } = props;
   const styles = useStyles();
@@ -73,14 +76,14 @@ const ClassRoomModal = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {room.map((room, index) => (
+              {roomInformation.map((roomInformation, index) => (
                 <TableRow key={index}>
                   <TableCell component="th" scope="row">
-                    {room.pet.id}
+                    {roomInformation.pet.id}
                   </TableCell>
-                  <TableCell align="left">{room.pet.petName}</TableCell>
-                  <TableCell align="left">{room.pet.size}</TableCell>
-                  <TableCell align="left">{room.pet.careToHave}</TableCell>
+                  <TableCell align="left">{roomInformation.pet.petName}</TableCell>
+                  <TableCell align="left">{roomInformation.pet.size}</TableCell>
+                  <TableCell align="left">{roomInformation.pet.careToHave}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
